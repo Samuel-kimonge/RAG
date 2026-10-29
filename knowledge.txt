@@ -1,0 +1,45 @@
+Machine Learning Engineering Knowledge Base
+
+Machine learning is a branch of artificial intelligence that enables
+computers to learn patterns from data and make predictions or decisions
+without being explicitly programmed for every individual task.
+
+Supervised learning uses labeled data. Common supervised learning
+algorithms include linear regression, logistic regression, decision trees,
+random forests, support vector machines, and neural networks.
+
+Unsupervised learning works with data that does not have labeled target
+values. Common techniques include clustering, dimensionality reduction,
+and anomaly detection.
+
+Deep learning is a subset of machine learning that uses neural networks
+with multiple layers. Deep learning is widely used in computer vision,
+natural language processing, speech recognition, and generative AI.
+
+A machine learning engineer is responsible for developing, evaluating,
+deploying, and maintaining machine learning systems. Important skills
+include Python programming, data processing, model development, model
+evaluation, software engineering, deployment, monitoring, and MLOps.
+
+Retrieval-Augmented Generation, commonly called RAG, combines information
+retrieval with large language models. A RAG system retrieves relevant
+information from an external knowledge base and provides that information
+to a language model as context before generating an answer.
+
+RAG systems are useful when an AI application needs to work with private,
+domain-specific, frequently changing, or externally stored information.
+RAG can reduce the need to retrain a language model whenever the knowledge
+base changes.
+
+Recommendation systems are machine learning systems that predict or rank
+items that may be useful or interesting to a user. They are commonly used
+in e-commerce, streaming platforms, social media, advertising, and
+content platforms.
+
+Web scraping is the process of programmatically collecting publicly
+accessible information from websites. Python libraries such as Requests
+and BeautifulSoup can be used for many static websites, while browser
+automation tools such as Playwright or Selenium can be used when pages
+require browser execution. Responsible scraping requires attention to
+website terms, access restrictions, rate limits, robots.txt, and applicable
+laws.

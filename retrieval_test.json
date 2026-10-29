@@ -1,0 +1,18 @@
+[
+  {
+    "question": "What is RAG?",
+    "expected_terms": ["retrieval", "large language models"]
+  },
+  {
+    "question": "What does a machine learning engineer do?",
+    "expected_terms": ["developing", "deploying"]
+  },
+  {
+    "question": "What is web scraping?",
+    "expected_terms": ["websites", "Python"]
+  },
+  {
+    "question": "What are recommendation systems?",
+    "expected_terms": ["items", "user"]
+  }
+]
