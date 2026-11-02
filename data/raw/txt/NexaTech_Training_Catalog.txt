@@ -1,0 +1,9 @@
+TRAINING CATALOG
+
+Security Essentials: 90 minutes. Required for all new employees. Covers phishing, passwords, device protection, and incident reporting.
+
+Python for Data Work: 6 hours. Prerequisite: basic programming. Covers data types, files, pandas, and simple automation.
+
+Cloud Operations Basics: 4 hours. Covers deployment concepts, logs, monitoring, and backups.
+
+Customer Communication: 2 hours. Covers support tone, escalation, and documenting customer interactions.

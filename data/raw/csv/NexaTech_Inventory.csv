@@ -1,0 +1,8 @@
+asset_tag,asset_type,location,assigned_team,status
+NX-001,Laptop,Nairobi Office,Engineering,In use
+NX-002,Laptop,Remote,Support,In use
+NX-003,Server,Cloud Region A,Operations,Active
+NX-004,Monitor,Nairobi Office,Finance,In use
+NX-005,Network Switch,Nairobi Office,IT,Maintenance
+NX-006,Laptop,Remote,Sales,In use
+NX-007,Server,Cloud Region B,Engineering,Standby

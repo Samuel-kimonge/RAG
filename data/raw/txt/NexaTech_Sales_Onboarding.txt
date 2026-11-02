@@ -1,0 +1,9 @@
+SALES ONBOARDING GUIDE
+
+CRM setup: New sales staff receive a CRM account and complete the data-handling module before entering customer information.
+
+Qualification: Record the customer's business goal, current workflow, budget range when volunteered, decision process, and timeline.
+
+Demo preparation: Confirm the customer's use case and prepare a demo workspace with fictional data. Never use another customer's confidential information.
+
+Handoff: After a signed agreement, provide Support and Implementation with scope, contacts, promised outcomes, and known constraints.
