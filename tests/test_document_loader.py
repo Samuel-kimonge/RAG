@@ -1,5 +1,3 @@
-
-
 from ingestion.document_loader import (
     discover_documents,
     load_document
@@ -30,14 +28,12 @@ def test_supported_file_types():
 
 
 def test_document_extraction():
-    """Verify that documents can be extracted."""
-
     documents = list(discover_documents(DATA_DIRECTORY))
 
     assert len(documents) > 0
 
-    for document in documents:
-        extracted_content = load_document(document)
+    for document_path in documents:
+        extracted_content = load_document(document_path)
 
         assert isinstance(extracted_content, list)
         assert len(extracted_content) > 0
@@ -46,3 +42,13 @@ def test_document_extraction():
             assert "text" in item
             assert isinstance(item["text"], str)
             assert item["text"].strip() != ""
+
+            assert "metadata" in item
+
+            metadata = item["metadata"]
+
+            assert metadata["source"] == str(document_path)
+            assert metadata["filename"] == document_path.name
+            assert metadata["file_type"] == document_path.suffix.lstrip(".")
+            assert "page_number" in metadata
+

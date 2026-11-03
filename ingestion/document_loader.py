@@ -82,7 +82,23 @@ def load_document(file_path):
         extracted_content = extract_csv(file_path)
     else:
         raise ValueError(f"Unsupported document type: {extension}")
-    return extracted_content
+
+    documents = []
+    for item in extracted_content:
+        text = item.get("text", "").strip()
+        if not text:
+            continue
+        document = {
+            "text": item["text"],
+            "metadata": {
+                "source": str(file_path),
+                "filename": file_path.name,
+                "file_type": extension.lstrip("."),
+                "page_number": item.get("page_number")
+            }
+        }
+        documents.append(document)
+    return documents
 
 
 def discover_documents(directory):
@@ -90,4 +106,4 @@ def discover_documents(directory):
     directory = Path(directory)
     for file_path in directory.rglob("*"):
         if file_path.is_file() and file_path.suffix.lower() in supported_extensions:
-            yield file_path       
+            yield file_path
