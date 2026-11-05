@@ -57,10 +57,10 @@ def extract_csv(file_path):
     with open(file_path, "r", encoding="utf-8", newline="")as file:
         reader = csv.DictReader(file)
         for row_number, row in enumerate(reader, start=1):
-            record_text = "\n".join({
+            record_text = "\n".join(
                 f"{key}: {value}"
                 for key, value in row.items()
-            })
+            )
             records.append({
                 "page_number": None,
                 "text": f"Record{row_number} \n {record_text}"

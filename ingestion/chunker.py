@@ -1,44 +1,56 @@
-import re
+
+import tiktoken
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+_ENCODING = tiktoken.get_encoding("cl100k_base")
 
 
-def chunk_text(text, chunk_size=1000, overlap=200):
-    """_
-    Split text into overlapping chunks
-    chunk size and overlap are measured in characters
-    """
-    if not text or not text.strip():
+def chunk_document(text, metadata=None, chunk_size=450, overlap=80):
+    """Create token-aware chunks with reliable character offsets."""
+    if not isinstance(text, str):
+        raise TypeError("text must be a string")
+    if chunk_size <= 0 or not 0 <= overlap < chunk_size:
+        raise ValueError("Invalid chunk_size or overlap")
+
+    text = text.strip()
+    if not text:
         return []
-    if chunk_size <= 0:
-        raise ValueError("chunk_size must be greater than zero!")
-    if overlap < 0 or overlap >= chunk_size:
-        raise ValueError("overlap must be >=0 and < chunk_size!")
 
-# Normalize whitespace while retaining paragraph boundaries
-    text = re.sub(r"[\t]+", " ", text)
-    text = re.sub(r"\n{3,}", "\n\n", text).strip()
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=overlap,
+        length_function=lambda value: len(_ENCODING.encode(value)),
+        separators=["\n\n", "\n", ". ", " ", ""],
+        add_start_index=False,
+    )
 
-    chunks = []
-    start = 0
+    documents = splitter.create_documents([text])
+    records, search_from = [], 0
 
-    while start < len(text):
-        end = min(start + chunk_size, len(text))
-    # prefer ending at sentence, paragraph, boundary
-        if end < len(text):
-            boundary = text.rfind("\n\n", start, end)
-            if boundary == -1:
-                boundary = text.rfind(". ", start, end)
-            if boundary == -1:
-                boundary = text.rfind(" ", start, end)
-            if boundary == start + chunk_size // 2:
-                end = boundary
+    for index, document in enumerate(documents):
+        chunk = document.page_content
+        start = text.find(chunk, search_from)
 
-        chunk = text[start:end].strip()
-        if chunk:
-            chunks.append(chunk)
+        if start < 0:
+            raise ValueError(f"Could not locate chunk {index} in source text")
 
-        if end >= len(text):
-            break
+        records.append({
+            "text": chunk,
+            "metadata": {
+                **(metadata or {}),
+                "start_index": start,
+                "chunk_index": index,
+                "token_count": len(_ENCODING.encode(chunk)),
+            },
+        })
+        search_from = start + 1
 
-        start = max(0, end - overlap)
+    return records
 
-    return chunks
+
+def chunk_text(text, chunk_size=450, overlap=80):
+    return [
+        chunk["text"]
+        for chunk in chunk_document(text, chunk_size, overlap=overlap)
+    ]
+

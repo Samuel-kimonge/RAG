@@ -2,3 +2,5 @@ requests
 chromadb
 numpy
 pypdf
+tiktoken>=0.9,<1
+langchain

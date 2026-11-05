@@ -1,0 +1,460 @@
+
+import csv
+import hashlib
+import logging
+import sqlite3
+
+from dataclasses import dataclass
+from datetime import date, datetime, timezone
+from pathlib import Path
+from typing import Any
+
+
+logger = logging.getLogger(__name__)
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DATA_DIRECTORY = PROJECT_ROOT / "data" / "raw" / "csv"
+DATABASE_PATH = (
+    PROJECT_ROOT
+    / "data"
+    / "processed"
+    / "structured_data.sqlite3"
+)
+
+# Only these known datasets and columns can be ingested or queried.
+DATASETS = {
+    "inventory": {
+        "filename": "NexaTech_Inventory.csv",
+        "table": "inventory_assets",
+        "primary_key": "asset_tag",
+        "columns": (
+            "asset_tag",
+            "asset_type",
+            "location",
+            "assigned_team",
+            "status",
+        ),
+    },
+    "tickets": {
+        "filename": "NexaTech_Support_Tickets.csv",
+        "table": "support_tickets",
+        "primary_key": "ticket_id",
+        "columns": (
+            "ticket_id",
+            "created_at",
+            "priority",
+            "product",
+            "issue",
+            "resolution",
+            "status",
+        ),
+    },
+}
+
+
+@dataclass(frozen=True)
+class IngestionResult:
+    dataset: str
+    rows: int
+    status: str
+
+
+class StructuredDataStore:
+
+    def __init__(
+        self,
+        database_path: Path = DATABASE_PATH,
+        data_directory: Path = DATA_DIRECTORY,
+    ):
+        self.database_path = Path(database_path)
+        self.data_directory = Path(data_directory)
+
+        self.database_path.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        self._initialize_database()
+
+    def _connect(self, readonly: bool = False):
+        if readonly:
+            connection = sqlite3.connect(
+                f"{self.database_path.resolve().as_uri()}?mode=ro",
+                uri=True,
+                timeout=15,
+            )
+        else:
+            connection = sqlite3.connect(
+                self.database_path,
+                timeout=15,
+            )
+
+        connection.row_factory = sqlite3.Row
+        connection.execute("PRAGMA busy_timeout = 15000")
+
+        return connection
+
+    def _initialize_database(self):
+        with self._connect() as connection:
+
+            connection.execute("PRAGMA journal_mode = WAL")
+
+            connection.execute("""
+                CREATE TABLE IF NOT EXISTS ingestion_state (
+                    source_path TEXT PRIMARY KEY,
+                    file_hash TEXT NOT NULL,
+                    row_count INTEGER NOT NULL,
+                    indexed_at TEXT NOT NULL
+                )
+            """)
+
+            for dataset in DATASETS.values():
+
+                table = dataset["table"]
+                columns = dataset["columns"]
+
+                column_definitions = ", ".join(
+                    f'"{column}" TEXT NOT NULL'
+                    for column in columns
+                )
+
+                connection.execute(f"""
+                    CREATE TABLE IF NOT EXISTS "{table}" (
+                        {column_definitions},
+                        source_path TEXT NOT NULL,
+                        record_key TEXT NOT NULL,
+                        row_number INTEGER NOT NULL,
+                        row_hash TEXT NOT NULL,
+
+                        UNIQUE(source_path, record_key)
+                    )
+                """)
+
+                connection.execute(f"""
+                    CREATE INDEX IF NOT EXISTS
+                    "idx_{table}_source"
+                    ON "{table}" (source_path)
+                """)
+
+    @staticmethod
+    def _file_hash(path: Path) -> str:
+        digest = hashlib.sha256()
+
+        with path.open("rb") as file:
+            for block in iter(
+                lambda: file.read(1024 * 1024),
+                b"",
+            ):
+                digest.update(block)
+
+        return digest.hexdigest()
+
+    @staticmethod
+    def _validate_row(dataset_name: str, row: dict[str, Any]):
+        if dataset_name == "tickets":
+            try:
+                date.fromisoformat(row["created_at"])
+            except ValueError as error:
+                raise ValueError(
+                    f"Invalid ticket date: {row['created_at']}"
+                ) from error
+
+    def _read_csv(self, dataset_name: str, path: Path):
+        dataset = DATASETS[dataset_name]
+        expected_columns = list(dataset["columns"])
+
+        records = []
+        seen_keys = set()
+
+        with path.open(
+            "r",
+            encoding="utf-8-sig",
+            newline="",
+        ) as file:
+
+            reader = csv.DictReader(file)
+
+            if reader.fieldnames != expected_columns:
+                raise ValueError(
+                    f"Unexpected CSV schema in {path.name}. "
+                    f"Expected {expected_columns}, "
+                    f"received {reader.fieldnames}"
+                )
+
+            for row_number, raw_row in enumerate(reader, start=2):
+
+                if None in raw_row:
+                    raise ValueError(
+                        f"Extra columns at CSV row {row_number}"
+                    )
+
+                row = {
+                    column: (raw_row[column] or "").strip()
+                    for column in expected_columns
+                }
+
+                if any(not value for value in row.values()):
+                    raise ValueError(
+                        f"Missing required value at CSV row "
+                        f"{row_number}"
+                    )
+
+                self._validate_row(dataset_name, row)
+
+                record_key = row[dataset["primary_key"]]
+
+                if record_key in seen_keys:
+                    raise ValueError(
+                        f"Duplicate record ID: {record_key}"
+                    )
+
+                seen_keys.add(record_key)
+
+                row_hash = hashlib.sha256(
+                    "\x1f".join(row[column] for column in expected_columns)
+                    .encode("utf-8")
+                ).hexdigest()
+
+                records.append({
+                    "values": row,
+                    "record_key": record_key,
+                    "row_number": row_number,
+                    "row_hash": row_hash,
+                })
+
+        return records
+
+    def ingest_dataset(self, dataset_name: str) -> IngestionResult:
+        if dataset_name not in DATASETS:
+            raise ValueError(
+                f"Unsupported dataset: {dataset_name}"
+            )
+
+        dataset = DATASETS[dataset_name]
+        path = self.data_directory / dataset["filename"]
+
+        if not path.is_file():
+            raise FileNotFoundError(path)
+
+        source_path = path.relative_to(
+            PROJECT_ROOT / "data" / "raw"
+        ).as_posix()
+
+        current_hash = self._file_hash(path)
+
+        # Parse and validate the entire file before changing the database.
+        records = self._read_csv(dataset_name, path)
+
+        table = dataset["table"]
+        columns = dataset["columns"]
+
+        with self._connect() as connection:
+
+            previous = connection.execute(
+                """
+                SELECT file_hash, row_count
+                FROM ingestion_state
+                WHERE source_path = ?
+                """,
+                (source_path,),
+            ).fetchone()
+
+            existing_count = connection.execute(
+                f'SELECT COUNT(*) FROM "{table}" WHERE source_path = ?',
+                (source_path,),
+            ).fetchone()[0]
+
+            if (
+                previous
+                and previous["file_hash"] == current_hash
+                and previous["row_count"] == len(records)
+                and existing_count == len(records)
+            ):
+                logger.info("Unchanged dataset: %s", source_path)
+
+                return IngestionResult(
+                    dataset=dataset_name,
+                    rows=len(records),
+                    status="skipped",
+                )
+
+            # Delete and replace inside one SQLite transaction.
+            # A failure rolls back the old dataset remains intact.
+            connection.execute(
+                f'DELETE FROM "{table}" WHERE source_path = ?',
+                (source_path,),
+            )
+
+            placeholders = ", ".join("?" for _ in range(
+                len(columns) + 4
+            ))
+
+            column_names = ", ".join(
+                f'"{column}"' for column in columns
+            )
+
+            column_names += (
+                ', source_path, record_key, row_number, row_hash'
+            )
+
+            insert_sql = f"""
+                INSERT INTO "{table}" ({column_names})
+                VALUES ({placeholders})
+            """
+
+            for record in records:
+
+                values = [
+                    record["values"][column]
+                    for column in columns
+                ]
+
+                values.extend([
+                    source_path,
+                    record["record_key"],
+                    record["row_number"],
+                    record["row_hash"],
+                ])
+
+                connection.execute(insert_sql, values)
+
+            connection.execute(
+                """
+                INSERT INTO ingestion_state (
+                    source_path,
+                    file_hash,
+                    row_count,
+                    indexed_at
+                )
+                VALUES (?, ?, ?, ?)
+                ON CONFLICT(source_path)
+                DO UPDATE SET
+                    file_hash = excluded.file_hash,
+                    row_count = excluded.row_count,
+                    indexed_at = excluded.indexed_at
+                """,
+                (
+                    source_path,
+                    current_hash,
+                    len(records),
+                    datetime.now(timezone.utc).isoformat(),
+                ),
+            )
+
+        logger.info(
+            "Ingested %s: %d records",
+            source_path,
+            len(records),
+        )
+
+        return IngestionResult(
+            dataset=dataset_name,
+            rows=len(records),
+            status="indexed",
+        )
+
+    def ingest_all(self):
+        results = []
+
+        for dataset_name in DATASETS:
+            results.append(
+                self.ingest_dataset(dataset_name)
+            )
+
+        return results
+
+    def query(
+        self,
+        dataset_name: str,
+        filters: dict[str, str] | None = None,
+        group_by: str | None = None,
+        count: bool = False,
+        limit: int = 100,
+    ) -> list[dict]:
+
+        if dataset_name not in DATASETS:
+            raise ValueError(
+                f"Unsupported dataset: {dataset_name}"
+            )
+
+        if not isinstance(limit, int) or not 1 <= limit <= 1000:
+            raise ValueError("limit must be between 1 and 1000")
+
+        dataset = DATASETS[dataset_name]
+        table = dataset["table"]
+        allowed_columns = set(dataset["columns"])
+
+        filters = filters or {}
+
+        if not isinstance(filters, dict):
+            raise TypeError("filters must be a dictionary")
+
+        if not set(filters).issubset(allowed_columns):
+            raise ValueError("Unsupported filter column")
+
+        if any(
+            not isinstance(value, str) or not value.strip()
+            for value in filters.values()
+        ):
+            raise ValueError("Filter values must be non-empty strings")
+
+        if group_by is not None and group_by not in allowed_columns:
+            raise ValueError("Unsupported grouping column")
+
+        where_parts = []
+        parameters = []
+
+        for column, value in filters.items():
+            where_parts.append(f'"{column}" = ?')
+            parameters.append(value.strip())
+
+        where_clause = (
+            " WHERE " + " AND ".join(where_parts)
+            if where_parts
+            else ""
+        )
+
+        if group_by is not None:
+
+            sql = f"""
+                SELECT "{group_by}" AS value, COUNT(*) AS total
+                FROM "{table}"
+                {where_clause}
+                GROUP BY "{group_by}"
+                ORDER BY total DESC, value ASC
+                LIMIT ?
+            """
+
+            parameters.append(limit)
+
+        elif count:
+
+            sql = f"""
+                SELECT COUNT(*) AS total
+                FROM "{table}"
+                {where_clause}
+            """
+
+        else:
+
+            sql = f"""
+                SELECT *
+                FROM "{table}"
+                {where_clause}
+                ORDER BY row_number ASC
+                LIMIT ?
+            """
+
+            parameters.append(limit)
+
+        with self._connect(readonly=True) as connection:
+            rows = connection.execute(
+                sql,
+                parameters,
+            ).fetchall()
+
+        return [dict(row) for row in rows]
+
+
+def get_structured_store() -> StructuredDataStore:
+    return StructuredDataStore()
