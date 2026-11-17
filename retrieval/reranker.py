@@ -49,6 +49,7 @@ class RerankedResult:
     dense_rank: int | None = None
     sparse_rank: int | None = None
     bm25_score: float | None = None
+    rerank_latency_ms: float = 0.0
 
     @property
     def content(self) -> str:
@@ -261,7 +262,7 @@ class CrossEncoderReranker:
 
         tokenizer = self._tokenizer
 
-        tokenizer.disable_truncation()
+        tokenizer.no_truncation()
         tokenizer.no_padding()
 
         try:
@@ -346,7 +347,7 @@ class CrossEncoderReranker:
 
         finally:
             # Reset mutable tokenizer settings after every batch.
-            tokenizer.disable_truncation()
+            tokenizer.no_truncation()
             tokenizer.no_padding()
 
     def rerank(
@@ -527,6 +528,56 @@ class CrossEncoderReranker:
                 dense_rank=getattr(candidate, "dense_rank", None),
                 sparse_rank=getattr(candidate, "sparse_rank", None),
                 bm25_score=getattr(candidate, "bm25_score", None),
+                rerank_latency_ms=elapsed_ms,
             )
             for candidate, score, original_rank in ranked
         ]
+        
+        
+class RerankedHybridKnowledgeBase:
+    """
+    Hybrid retrieval followed by cross-encoder reranking.
+
+    Provides the same search interface expected by RetrievalEvaluator.
+    """
+
+    def __init__(
+        self,
+        hybrid_store: Any,
+        reranker: CrossEncoderReranker,
+    ) -> None:
+        self.hybrid_store = hybrid_store
+        self.reranker = reranker
+
+    def search(
+        self,
+        query: str,
+        *,
+        k: int = 5,
+        file_type: str | None = None,
+        source: str | None = None,
+    ) -> list[RerankedResult]:
+
+        if not isinstance(query, str) or not query.strip():
+            raise ValueError("query must be a non-empty string.")
+
+        if isinstance(k, bool) or not isinstance(k, int) or k < 1:
+            raise ValueError("k must be a positive integer.")
+
+        # Retrieve candidates using dense + BM25 + RRF.
+        candidates = self.hybrid_store.search(
+            query,
+            k=k,
+            file_type=file_type,
+            source=source,
+        )
+
+        if not candidates:
+            return []
+
+        # Reorder the entire returned candidate set.
+        return self.reranker.rerank(
+            query,
+            candidates,
+            top_k=k,
+        )

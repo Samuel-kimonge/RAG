@@ -56,7 +56,7 @@ def parse_args():
 
     parser.add_argument(
         "--method",
-        choices=("dense", "hybrid"),
+        choices=("dense", "hybrid", "reranked"),
         default="dense",
         help="Retrieval method to benchmark.",
     )
@@ -78,7 +78,7 @@ def parse_args():
     parser.add_argument(
         "--candidate-multiplier",
         type=int,
-        default=4,
+        default=1,
         help="Hybrid candidate count multiplier.",
     )
 
@@ -96,6 +96,41 @@ def parse_args():
         help="Reciprocal Rank Fusion constant.",
     )
 
+    parser.add_argument(
+        "--reranker-model-dir",
+        type=Path,
+        default=None,
+    )
+
+    parser.add_argument(
+        "--reranker-batch-size",
+        type=int,
+        default=2,
+    )
+
+    parser.add_argument(
+        "--reranker-max-length",
+        type=int,
+        default=384,
+    )
+
+    parser.add_argument(
+        "--reranker-max-query-tokens",
+        type=int,
+        default=128,
+    )
+
+    parser.add_argument(
+        "--reranker-intra-op-threads",
+        type=int,
+        default=2,
+    )
+
+    parser.add_argument(
+        "--reranker-inter-op-threads",
+        type=int,
+        default=1,
+    )
     return parser.parse_args()
 
 
@@ -163,12 +198,7 @@ def validate_arguments(args) -> tuple[int, ...]:
 
 
 def build_retriever(args):
-    """
-    Construct the requested retrieval method.
-
-    Hybrid retrieval reuses the same existing Chroma knowledge base.
-    It does not create or rebuild another vector collection.
-    """
+    """Build the selected retrieval architecture."""
 
     dense_store = get_knowledge_base()
 
@@ -177,11 +207,37 @@ def build_retriever(args):
 
     from retrieval.hybrid_store import HybridKnowledgeBase
 
-    return HybridKnowledgeBase(
+    hybrid_store = HybridKnowledgeBase(
         dense_store=dense_store,
         candidate_multiplier=args.candidate_multiplier,
         max_candidates=args.max_candidates,
         rrf_k=args.rrf_k,
+    )
+
+    if args.method == "hybrid":
+        return hybrid_store
+
+    from retrieval.reranker import (
+        CrossEncoderReranker,
+        RerankedHybridKnowledgeBase,
+    )
+
+    reranker_options = {
+        "batch_size": args.reranker_batch_size,
+        "max_length": args.reranker_max_length,
+        "max_query_tokens": args.reranker_max_query_tokens,
+        "intra_op_num_threads": args.reranker_intra_op_threads,
+        "inter_op_num_threads": args.reranker_inter_op_threads,
+    }
+
+    if args.reranker_model_dir is not None:
+        reranker_options["model_dir"] = args.reranker_model_dir
+
+    reranker = CrossEncoderReranker(**reranker_options)
+
+    return RerankedHybridKnowledgeBase(
+        hybrid_store=hybrid_store,
+        reranker=reranker,
     )
 
 
@@ -190,11 +246,11 @@ def print_summary(
     method: str,
 ) -> None:
 
-    title = (
-        "HYBRID"
-        if method == "hybrid"
-        else "DENSE BASELINE"
-    )
+    title = {
+         "dense": "DENSE BASELINE",
+         "hybrid": "HYBRID",
+         "reranked": "HYBRID + CROSS-ENCODER",
+     }[method]
 
     print(f"\n========== {title} RETRIEVAL RESULTS ==========")
 
@@ -219,6 +275,17 @@ def print_summary(
 
     for name, value in summary["latency_ms"].items():
         print(f"  {name:<12}: {value:.2f}")
+
+    rerank_latency = summary.get("reranking_latency_ms")
+
+    if rerank_latency:
+        print("\nCross-encoder inference latency (milliseconds):")
+
+        for name, value in rerank_latency.items():
+            if name == "successful_reranking_queries":
+                print(f"  {name:<30}: {value}")
+            else:
+                print(f"  {name:<30}: {value:.2f}")
 
     print("\nCategory performance:")
 
@@ -284,15 +351,14 @@ def main() -> int:
             )
 
         output_dir = args.output_dir
-
         if output_dir is None:
-            folder = (
-                "hybrid"
-                if args.method == "hybrid"
-                else "baseline"
-            )
+            folder = {
+                "dense": "baseline",
+                "hybrid": "hybrid",
+                "reranked": "reranked",
+            }[args.method]
 
-            output_dir = DEFAULT_OUTPUT_ROOT / folder
+        output_dir = DEFAULT_OUTPUT_ROOT / folder
 
         print("\nInitializing existing knowledge base...")
 
@@ -325,18 +391,38 @@ def main() -> int:
             "k_values": list(evaluator.ks),
         }
 
-        if args.method == "hybrid":
+        if args.method in ("hybrid", "reranked"):
             run_metadata.update({
                 "candidate_multiplier": args.candidate_multiplier,
                 "max_candidates": args.max_candidates,
                 "rrf_k": args.rrf_k,
                 "sparse_index_path": str(
                     retriever.sparse_store.db_path
-                ),
-                "sparse_sync_stats": (
-                    retriever.sparse_store.last_sync_stats
+                    if args.method == "hybrid"
+                    else retriever.hybrid_store.sparse_store.db_path
                 ),
             })
+
+            sparse_store = (
+                retriever.sparse_store
+                if args.method == "hybrid"
+                else retriever.hybrid_store.sparse_store
+            )
+
+            run_metadata["sparse_sync_stats"] = (
+                sparse_store.last_sync_stats
+            )
+
+        if args.method == "reranked":
+            reranker = retriever.reranker
+
+            run_metadata["reranker"] = {
+                "model": str(reranker.model_path),
+                "batch_size": reranker.batch_size,
+                "max_length": reranker.max_length,
+                "max_query_tokens": reranker.max_query_tokens,
+                "execution_provider": "CPUExecutionProvider",
+            }
 
         report["run_metadata"] = run_metadata
 
@@ -346,10 +432,10 @@ def main() -> int:
         )
 
         print_summary(
-            report["summary"],
-            args.method,
-        )
-
+            summary=report["summary"],
+            method=args.method
+            )
+        
         print("Reports generated:")
         print(f"  Detailed results: {results_path}")
         print(f"  Summary:          {summary_path}")

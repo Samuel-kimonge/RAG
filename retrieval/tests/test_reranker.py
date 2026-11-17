@@ -7,7 +7,7 @@ import threading
 from types import SimpleNamespace
 from langchain_core.documents import Document
 
-from retrieval.reranker import CrossEncoderReranker
+from retrieval.reranker import CrossEncoderReranker,RerankedHybridKnowledgeBase
 
 
 class FakeEncoding:
@@ -18,12 +18,13 @@ class FakeEncoding:
 
 
 class FakeTokenizer:
-    def enable_truncation(self, max_length, strategy="longest_first", direction="right"):
-        self.truncation_strategy = strategy
-        self.max_length = max_length
-        self.truncation_strategies.append(strategy)
+    def __init__(self):
+        self.truncation_strategy = None
+        self.truncation_strategies = []
+        self.max_length = None
+        self.encoded_queries = []
 
-    def disable_truncation(self):
+    def no_truncation(self):
         self.truncation_strategy = None
 
     def no_padding(self):
@@ -43,6 +44,7 @@ class FakeTokenizer:
     ):
         self.max_length = max_length
         self.truncation_strategy = strategy
+        self.truncation_strategies.append(strategy)
 
     def enable_padding(
         self,
@@ -59,7 +61,7 @@ class FakeTokenizer:
         for query, document in pairs:
             self.encoded_queries.append(query)
 
-            # Simulate a higher relevance logit for a matching document.
+            # Simulate a higher relevance score for matching documents.
             code = (
                 9
                 if "target fact" in document.lower()
@@ -234,8 +236,8 @@ def test_only_document_sequence_is_truncated():
         ],
     )
 
-    assert reranker._tokenizer.truncation_strategies == ["only_second"]
-    assert reranker._tokenizer.encoded_queries == ["one two"]
+    assert (reranker._tokenizer.truncation_strategies == ["only_second"])
+    assert (reranker._tokenizer.encoded_queries == ["one two"])
 
 
 def test_empty_candidates_return_empty_list():
@@ -296,3 +298,65 @@ def test_inference_failure_is_not_silently_ignored():
             "Find the target fact.",
             candidates,
         )
+
+
+def test_reranked_hybrid_adapter_preserves_search_interface():
+    candidate = make_candidate(
+        "chunk-001",
+        "The target fact is recorded here.",
+    )
+
+    class FakeHybridStore:
+        def __init__(self):
+            self.received = None
+
+        def search(self, query, *, k, file_type=None, source=None):
+            self.received = {
+                "query": query,
+                "k": k,
+                "file_type": file_type,
+                "source": source,
+            }
+            return [candidate]
+
+    class FakeReranker:
+        def __init__(self):
+            self.received = None
+
+        def rerank(self, query, candidates, *, top_k):
+            self.received = {
+                "query": query,
+                "candidate_ids": [item.chunk_id for item in candidates],
+                "top_k": top_k,
+            }
+            return candidates
+
+    hybrid = FakeHybridStore()
+    reranker = FakeReranker()
+
+    adapter = RerankedHybridKnowledgeBase(
+        hybrid_store=hybrid,
+        reranker=reranker,
+    )
+
+    results = adapter.search(
+        "Find the target fact.",
+        k=5,
+        file_type="pdf",
+        source="test.pdf",
+    )
+
+    assert results[0].chunk_id == "chunk-001"
+
+    assert hybrid.received == {
+        "query": "Find the target fact.",
+        "k": 5,
+        "file_type": "pdf",
+        "source": "test.pdf",
+    }
+
+    assert reranker.received == {
+        "query": "Find the target fact.",
+        "candidate_ids": ["chunk-001"],
+        "top_k": 5,
+    }

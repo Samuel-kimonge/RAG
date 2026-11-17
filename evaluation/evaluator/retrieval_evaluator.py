@@ -102,6 +102,7 @@ class RetrievalEvaluator:
         cases = dataset["test_cases"]
         records = []
         latencies = []
+        reranking_latencies = []
 
         for index, case in enumerate(cases, start=1):
             case_id = case["id"]
@@ -121,6 +122,16 @@ class RetrievalEvaluator:
                     query,
                     k=self.max_k,
                 )
+                
+                rerank_latency_ms = (
+                    float(getattr(retrieved[0], "rerank_latency_ms"))
+                    if retrieved
+                    and getattr(retrieved[0], "rerank_latency_ms", None) is not None
+                    else None
+                )
+
+                if rerank_latency_ms is not None:
+                    reranking_latencies.append(rerank_latency_ms)
 
                 latency_ms = (
                     time.perf_counter() - started
@@ -140,6 +151,7 @@ class RetrievalEvaluator:
                     "status": "success",
                     "latency_ms": latency_ms,
                     "retrieved_count": len(retrieved),
+                    "reranking_latency_ms": rerank_latency_ms,
                     "retrieved": [
                             {
                                  "rank": rank,
@@ -161,6 +173,15 @@ class RetrievalEvaluator:
                                     ),
                                  "bm25_score": getattr(
                                     result, "bm25_score", None
+                                    ),
+                                 "relevance_score": getattr(
+                                    result, "relevance_score", None
+                                    ),
+                                 "original_rank": getattr(
+                                    result, "original_rank", None
+                                    ),
+                                 "rerank_latency_ms": getattr(
+                                    result, "rerank_latency_ms", None
                                     ),
                             }
                             for rank, result in enumerate(
@@ -205,6 +226,7 @@ class RetrievalEvaluator:
                     "retrieved": [],
                     "metrics": None,
                     "error": str(error),
+                    "reranking_latency_ms": None,
                 }
 
             records.append(record)
@@ -293,6 +315,18 @@ class RetrievalEvaluator:
                 if successful else 0.0
             ),
             "category_summary": category_summary,
+            "reranking_latency_ms": (
+                {
+                 "successful_reranking_queries": len(reranking_latencies),
+                 "mean": statistics.fmean(reranking_latencies),
+                 "p50": percentile(reranking_latencies, 50),
+                 "p95": percentile(reranking_latencies, 95),
+                 "p99": percentile(reranking_latencies, 99),
+                 "max": max(reranking_latencies),
+                }
+                if reranking_latencies
+                else None
+            ),
         }
 
         return {
@@ -304,3 +338,4 @@ class RetrievalEvaluator:
             "summary": summary,
             "queries": records,
         }
+        
