@@ -1,0 +1,585 @@
+{
+  "version": 1,
+  "documents": {
+    "csv/NexaTech_Inventory.csv": {
+      "sha256": "edc8d840e3b519b5630f3a451e4671fce65142178638900412eff385cab42fb0",
+      "chunks": 7,
+      "indexed_at": null
+    },
+    "csv/NexaTech_Support_Tickets.csv": {
+      "sha256": "eed49863a25ea436b57edfb1e91a77d744c16c4a1b6d739454cab8fc12518bfb",
+      "chunks": 8,
+      "indexed_at": null
+    },
+    "docx/NexaTech_Customer_Support_Playbook.docx": {
+      "sha256": "d3fa8a160efc31a8029ac2c3dfab4212aff9c9f9a3099c05dbe336676be9e0ca",
+      "chunks": 1,
+      "indexed_at": null
+    },
+    "docx/NexaTech_Data_Retention_Policy.docx": {
+      "sha256": "928403f0b94033b15a485079705c24bbbcb36468bf88c790d4baa08ee7b52281",
+      "chunks": 1,
+      "indexed_at": null
+    },
+    "docx/NexaTech_Employee_Handbook.docx": {
+      "sha256": "35793edea5ddda3201d97af02e0b4d7eeaf607a53757cfb09fca72b01ee0b3ba",
+      "chunks": 1,
+      "indexed_at": null
+    },
+    "docx/NexaTech_Finance_Expense_Policy.docx": {
+      "sha256": "bbba765a7a08eb8ee505e6a9745e9da3b720e918314cf30e6f287ae833de7d7b",
+      "chunks": 1,
+      "indexed_at": null
+    },
+    "docx/NexaTech_Product_FAQ.docx": {
+      "sha256": "e1c2a63097c94ea8a5b8a5bc5c654a9669ce147b756fda9e879a6ee4529570c6",
+      "chunks": 1,
+      "indexed_at": null
+    },
+    "pdf/NexaTech_API_Integration_Guide.pdf": {
+      "sha256": "472a3d0c62bb46e53a73d9ede0b139efe1205224aa550bf979c911dc81138732",
+      "chunks": 1,
+      "indexed_at": null
+    },
+    "pdf/NexaTech_Cloud_Operations_Runbook.pdf": {
+      "sha256": "9b75a5792c6f9032bf24ff38128ea44c5071dec75e1fd5ea062f25a877e0db1a",
+      "chunks": 1,
+      "indexed_at": null
+    },
+    "pdf/NexaTech_IT_Security_Policy.pdf": {
+      "sha256": "3a6b63929b9ac4a9c1c08ee9862a377837878b06465edb52ee13e4ccf4d47fe6",
+      "chunks": 1,
+      "indexed_at": null
+    },
+    "pdf/NexaTech_Incident_Response_Plan.pdf": {
+      "sha256": "cb084736806dd7858a7126795675ef2b0e913e598d095f2d45efcc1e5810aa13",
+      "chunks": 1,
+      "indexed_at": null
+    },
+    "pdf/NexaTech_Product_Atlas_Manual.pdf": {
+      "sha256": "d0cbc4b0925b82da6968bc3029f9ca2b88d103802ee7d4d4c8f051124edfeb58",
+      "chunks": 1,
+      "indexed_at": null
+    },
+    "pdf/NexaTech_Q3_Project_Report.pdf": {
+      "sha256": "a3de58b0b2e74da73967a09beea94f2fdea530d2e03114e0102d677df5ca1e06",
+      "chunks": 1,
+      "indexed_at": null
+    },
+    "txt/NexaTech_Sales_Onboarding.txt": {
+      "sha256": "fbbb4e6d60b1cf67be1e260841705bb249900766f5736a22bffd65a25408a130",
+      "chunks": 1,
+      "indexed_at": null
+    },
+    "txt/NexaTech_Training_Catalog.txt": {
+      "sha256": "1fd6697a595b9d137fff48f7335bd2027cc29706e1d492f8c0e6a00f21d58c06",
+      "chunks": 1,
+      "indexed_at": null
+    },
+    "txt/incremental_test/test_document_001.txt": {
+      "sha256": "b4575a8790197c6fc00487d89f7d69155b63f876f9a99933faed4f715cda38c3",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:14.586038+00:00"
+    },
+    "txt/incremental_test/test_document_002.txt": {
+      "sha256": "867221a9d6a7830ef5580531a37803297513b6efd11250581cf21a72ca6d6e85",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:15.233517+00:00"
+    },
+    "txt/incremental_test/test_document_003.txt": {
+      "sha256": "3e8f7b14b917dfdf714c8d7d993ada86a80bf6871049c3716d6b9daaff9c3410",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:15.871261+00:00"
+    },
+    "txt/incremental_test/test_document_004.txt": {
+      "sha256": "8076d30cf54cf6c49b0cecf3b80774a082ba0756b60b3b39d4208296fe13da65",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:16.490792+00:00"
+    },
+    "txt/incremental_test/test_document_005.txt": {
+      "sha256": "dc946acb5f59d607542798b2f2456cba9cd6fa95b2ccd23826924b100756bd13",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:17.257922+00:00"
+    },
+    "txt/incremental_test/test_document_006.txt": {
+      "sha256": "132525cf0b299f41ed56edde0ec36a029558c1c1b6284f8a4581f3384579c5f3",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:17.859621+00:00"
+    },
+    "txt/incremental_test/test_document_007.txt": {
+      "sha256": "919ba3b51116922ab2cad33de69e61898a028baeb6b20fd3407a9cbd5df02faf",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:18.430013+00:00"
+    },
+    "txt/incremental_test/test_document_008.txt": {
+      "sha256": "fee4b1577ac43b47787b43eed3463ebfab1b2eb85d34d72bc6ae3a2b0307922d",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:19.134071+00:00"
+    },
+    "txt/incremental_test/test_document_009.txt": {
+      "sha256": "f2930389916de213e1b72804dead4c3d316affd478bf5af23cc7b385c734c046",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:19.782023+00:00"
+    },
+    "txt/incremental_test/test_document_010.txt": {
+      "sha256": "68824f6a7789e5aedcf90ff94089cf68538bdad39c0c3db39b3e38f20feb5c10",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:20.379630+00:00"
+    },
+    "txt/incremental_test/test_document_011.txt": {
+      "sha256": "708bf38da41ee1361ed9c3f2d416b8408e03434d03a0a8c4de8470c0363224c4",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:21.056864+00:00"
+    },
+    "txt/incremental_test/test_document_012.txt": {
+      "sha256": "aa6141ce9a36071119db5473f1820c8faf76e9fecfe12b88754ae77d9efba8a5",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:21.631633+00:00"
+    },
+    "txt/incremental_test/test_document_013.txt": {
+      "sha256": "e7928b4dfbb5ea4f878929b3c75b666ffaa4baf4d1393342a336bdc1e402ebb7",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:22.186558+00:00"
+    },
+    "txt/incremental_test/test_document_014.txt": {
+      "sha256": "f8dc4c6f477b2ef1e543df31511959c04e7deae5dc039ed0c4828ddbc09b0c71",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:23.060034+00:00"
+    },
+    "txt/incremental_test/test_document_015.txt": {
+      "sha256": "cb5a75df137979bb4350948133587322e4786ea4d307ac7731af645dd53516de",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:23.820149+00:00"
+    },
+    "txt/incremental_test/test_document_016.txt": {
+      "sha256": "e5899322ee6467afe36c498f42eb9887d7ed4a3bb5b1d58e0c296728ff289d1c",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:24.528803+00:00"
+    },
+    "txt/incremental_test/test_document_017.txt": {
+      "sha256": "f57ac2e2c46e07d1e6ddf015ad477d140229db866c1a3c76583367ba23c2bf2a",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:25.154316+00:00"
+    },
+    "txt/incremental_test/test_document_018.txt": {
+      "sha256": "b7d3de5ea9ac203ee3a1ef701785111537d3f1958273bd49a182c5d910fc546e",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:25.736907+00:00"
+    },
+    "txt/incremental_test/test_document_019.txt": {
+      "sha256": "6b05acb4230c6c336137a69e07cf5df0a7adf8db5c7200b266a7f966264f51c7",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:26.310651+00:00"
+    },
+    "txt/incremental_test/test_document_020.txt": {
+      "sha256": "45727826897f9f2aa3184876d341b0bc7defbca61c4b3a7a56f2dba4f2642cee",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:26.913767+00:00"
+    },
+    "txt/incremental_test/test_document_021.txt": {
+      "sha256": "f8a882ccfdc3a49688da58cc4a399221b640de439415b99f061f5d3d3ff3a7b3",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:27.511983+00:00"
+    },
+    "txt/incremental_test/test_document_022.txt": {
+      "sha256": "09a46c9282b1159cfb24bb7f11f2174c14e1c40633a7d4e8ae94f4dd95e76355",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:28.293685+00:00"
+    },
+    "txt/incremental_test/test_document_023.txt": {
+      "sha256": "b05eb7e0a7744725e70c400e8766a09ce1b777f571435806f81063dcd3e40c68",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:28.925243+00:00"
+    },
+    "txt/incremental_test/test_document_024.txt": {
+      "sha256": "850508bb4cf823941c834f8ffdc6a1c9eabf5f46adf476d648385e0a63ca8415",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:29.569981+00:00"
+    },
+    "txt/incremental_test/test_document_025.txt": {
+      "sha256": "7976a3517462f19f63223a11cccdaa87d7442fb605646264ac0ec03f52a1893d",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:30.257041+00:00"
+    },
+    "txt/incremental_test/test_document_026.txt": {
+      "sha256": "2f5336b28850dacd9385eab6ab32f42b723a8cabf9a440ade9e32028006a4fea",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:30.893064+00:00"
+    },
+    "txt/incremental_test/test_document_027.txt": {
+      "sha256": "de40c070993763f5632b215a188a3cc96ce13ec3f98e9059973515fbcc8f14ed",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:31.767236+00:00"
+    },
+    "txt/incremental_test/test_document_028.txt": {
+      "sha256": "19a0dce7e7f763773354d4698304c4efa23d7997133ca93793300ad8f856848a",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:32.352251+00:00"
+    },
+    "txt/incremental_test/test_document_029.txt": {
+      "sha256": "1bb54e7dac18e109d52835b14cd5678329eea300f61f34ba51510cb8db323ec8",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:32.908957+00:00"
+    },
+    "txt/incremental_test/test_document_030.txt": {
+      "sha256": "1966a2a2c5041675c70d1dc5a6f8125437d7bb013f5468fa0f61126718612160",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:33.503683+00:00"
+    },
+    "txt/incremental_test/test_document_031.txt": {
+      "sha256": "2f398fb2394004b45f4e02534edf52c48b024d9b0e9ba3ecce99cfa713763ba6",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:34.122022+00:00"
+    },
+    "txt/incremental_test/test_document_032.txt": {
+      "sha256": "0a6d58e0d5d37c1beb624cd48bda664cf8ed80c57f54eee22de247bb5af455e8",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:34.679693+00:00"
+    },
+    "txt/incremental_test/test_document_033.txt": {
+      "sha256": "3a9c35b6790f80450d7d112e3dd8ac55eaf6a513a21a26357238d556ea846c51",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:35.389905+00:00"
+    },
+    "txt/incremental_test/test_document_034.txt": {
+      "sha256": "13a6bd90737bc9b674dbe924c517198d9686f22c2c720a592cb500c5910340c0",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:36.013531+00:00"
+    },
+    "txt/incremental_test/test_document_035.txt": {
+      "sha256": "db10fdadfaddb48328d00af855d884237ed698acb251ebebe324e61b5d79d53d",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:36.573909+00:00"
+    },
+    "txt/incremental_test/test_document_036.txt": {
+      "sha256": "9115325649e74f2b9170089e6c2cd09b81b691e7a21b1878869eaa068de71184",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:37.234576+00:00"
+    },
+    "txt/incremental_test/test_document_037.txt": {
+      "sha256": "dc531cf4913843d4621a669917bb45891a955158fdd9b7b67622d41c968fdaa4",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:37.829630+00:00"
+    },
+    "txt/incremental_test/test_document_038.txt": {
+      "sha256": "ed3e1c90451d0f04c5d683d3eb17d0f1c77838332f041796f4df8a7a6e88bc0c",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:38.395074+00:00"
+    },
+    "txt/incremental_test/test_document_039.txt": {
+      "sha256": "4e254e3dda6f27c1414d53d8c4b3aa8266ba99d0b53c4af0bccef9dc7aab85e6",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:38.972440+00:00"
+    },
+    "txt/incremental_test/test_document_040.txt": {
+      "sha256": "6ff8596e7df75b8bd5f88371ef748ed27efa059bf5d624a4fa9c6fa880b56fa4",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:39.540031+00:00"
+    },
+    "txt/incremental_test/test_document_041.txt": {
+      "sha256": "4376ad47f87cbacbf30ddbb15743e9c199561c613babad501e3059fa8edc3897",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:40.132008+00:00"
+    },
+    "txt/incremental_test/test_document_042.txt": {
+      "sha256": "8d520b3ffb56707d0e587a212433ed9035cb8f0157522e4b0d898931c2ee49a0",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:40.714896+00:00"
+    },
+    "txt/incremental_test/test_document_043.txt": {
+      "sha256": "9d06676b925095fd328a636e82420c06fe71ec3e38b534a438c5361a2e776f0a",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:41.293203+00:00"
+    },
+    "txt/incremental_test/test_document_044.txt": {
+      "sha256": "15d818365c3e55646782b7e0482d4cf3d7925c010445c712f201aaf9157cc57b",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:41.870614+00:00"
+    },
+    "txt/incremental_test/test_document_045.txt": {
+      "sha256": "3f681707f674da74e476ebcb3291c52acecf600b135a55b864d0f2ef91478578",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:42.515671+00:00"
+    },
+    "txt/incremental_test/test_document_046.txt": {
+      "sha256": "a2c6121f5f348eff2484a36f30425fda40e2570a2fc73b42ea1eda0bd8cb7400",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:43.081290+00:00"
+    },
+    "txt/incremental_test/test_document_047.txt": {
+      "sha256": "bd610676dc84f0b3e5abca42445ecf719be555d15289ea3283482e99d51685af",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:43.658609+00:00"
+    },
+    "txt/incremental_test/test_document_048.txt": {
+      "sha256": "9eb99b89d8bac15592f219ff8865b26009d397cf8c67d513a3b21dfa4a6cd24f",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:44.246916+00:00"
+    },
+    "txt/incremental_test/test_document_049.txt": {
+      "sha256": "08b559f8b070a15861d63a143607cca1aa59aaf36138301164f90d20ceea2df9",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:44.831144+00:00"
+    },
+    "txt/incremental_test/test_document_050.txt": {
+      "sha256": "1accd2530d8978f4da938090b1f7c5929ac74d71c45fae80157fc122e499b070",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:45.403275+00:00"
+    },
+    "txt/incremental_test/test_document_051.txt": {
+      "sha256": "9b02356c094428fde0f654d6a6e966a3cfb78c144af2008121725db108e99363",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:46.050829+00:00"
+    },
+    "txt/incremental_test/test_document_052.txt": {
+      "sha256": "50f0b6c2e3f89479939eb913ec291560fd261ee45a9a2e716b13e8b2fb3ff91c",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:46.633542+00:00"
+    },
+    "txt/incremental_test/test_document_053.txt": {
+      "sha256": "da25ee2c9d00f008d4adc98f3d53322ee7daf7ca465f08dc0b6ca8400fa49863",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:47.209548+00:00"
+    },
+    "txt/incremental_test/test_document_054.txt": {
+      "sha256": "cd5b44699d64337852956df8f866f53bec281e632a5547fff79bcbbf2980f046",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:47.776504+00:00"
+    },
+    "txt/incremental_test/test_document_055.txt": {
+      "sha256": "1adbe619bff8172258b6f8515d65450cc831e067fe31db6aaab06fa54bbbee4a",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:48.344654+00:00"
+    },
+    "txt/incremental_test/test_document_056.txt": {
+      "sha256": "84b743caed804fab71c529061e96a289414d97648b6fb8ada9a5278629780eeb",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:48.911945+00:00"
+    },
+    "txt/incremental_test/test_document_057.txt": {
+      "sha256": "e389791ce99a1cd7c70d6349ef3ee6c62638b9b5487b6582168dacd822cec4f7",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:49.461133+00:00"
+    },
+    "txt/incremental_test/test_document_058.txt": {
+      "sha256": "b18b71ac55d352d08f39cc1f0b8b9cbfc18c0e019f16bd47f5b47d59cfc11b36",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:50.027449+00:00"
+    },
+    "txt/incremental_test/test_document_059.txt": {
+      "sha256": "9a0e852105ae0cba190ee0f0716a213c61fa852f323aff1b367230c1c9bb7369",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:50.648461+00:00"
+    },
+    "txt/incremental_test/test_document_060.txt": {
+      "sha256": "ae522185ddde7c3719a44639689e28c497ea13fccb10365f1f7902d6d677390c",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:51.255171+00:00"
+    },
+    "txt/incremental_test/test_document_061.txt": {
+      "sha256": "6ffa2938c96ac6eb192caeee1e436246bf77fba217e90b3579442f2f97311c8d",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:51.818316+00:00"
+    },
+    "txt/incremental_test/test_document_062.txt": {
+      "sha256": "1eb7c65cdf6a32ef885e7d62033f0807fdc307a2b33d729958c509e86d0f0a1e",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:52.395108+00:00"
+    },
+    "txt/incremental_test/test_document_063.txt": {
+      "sha256": "407c5ecf15e81135cc358d2c0647bc800d41f1df35ae176965ea2e59bf8e342f",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:53.011430+00:00"
+    },
+    "txt/incremental_test/test_document_064.txt": {
+      "sha256": "c470cda77b00857587ff9cf0f7139dd62d53a386d25c809a4cf9a1f9d7ad35aa",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:53.559285+00:00"
+    },
+    "txt/incremental_test/test_document_065.txt": {
+      "sha256": "6c667edcdd766f703eb9876a7d03a6b07d873d56b135e2f22d17779e1b6989b7",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:54.133877+00:00"
+    },
+    "txt/incremental_test/test_document_066.txt": {
+      "sha256": "98ca2ece51cf4e2b24059fe00d97fe1c109b6bce80ca6e59c3695303e3c0fc91",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:54.726119+00:00"
+    },
+    "txt/incremental_test/test_document_067.txt": {
+      "sha256": "ff1b4b55eaa1ed4946763f048046ba397ce883412a070818568f0b26476aecc0",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:55.316096+00:00"
+    },
+    "txt/incremental_test/test_document_068.txt": {
+      "sha256": "6925014089e8ff19e134b06b82abddf548e3b81723b36ff733fe09876cf03838",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:55.911918+00:00"
+    },
+    "txt/incremental_test/test_document_069.txt": {
+      "sha256": "46434c9e627086aa1a3386e5eee8785e164b139a82920871c244cd600a75d4eb",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:56.459899+00:00"
+    },
+    "txt/incremental_test/test_document_070.txt": {
+      "sha256": "d7af1bdb815d0f04315ef49409472f26e1f2d620be56a310ade38f593a590b7e",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:57.076760+00:00"
+    },
+    "txt/incremental_test/test_document_071.txt": {
+      "sha256": "b7890b6dbafe91326d8f1e8b1bdcb25275857b5d111a1315541fdf2b39fef501",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:57.645903+00:00"
+    },
+    "txt/incremental_test/test_document_072.txt": {
+      "sha256": "b46454040c0cc2cbf8d64351c4f43de29d8bae4ab2b7c968dd16da00dbcce1cd",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:58.198176+00:00"
+    },
+    "txt/incremental_test/test_document_073.txt": {
+      "sha256": "b216d7dc740ae08fc5668bc877a55aa117db2fe2cd230003a40b90b463ea6c2f",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:58.758730+00:00"
+    },
+    "txt/incremental_test/test_document_074.txt": {
+      "sha256": "6a18b2bbd69aeaf56d8f7c23ca477552123a8e5941d9ad4bebfdf961a3cd546f",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:59.431989+00:00"
+    },
+    "txt/incremental_test/test_document_075.txt": {
+      "sha256": "46412281a6a640fb730f174b061e49b404e920a2e193b3e0fdc610704906980f",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:52:59.997388+00:00"
+    },
+    "txt/incremental_test/test_document_076.txt": {
+      "sha256": "54af2a7dc2473cd8f3437ea90a5f54cfbc713fed27343d8110472532f3feed16",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:00.593184+00:00"
+    },
+    "txt/incremental_test/test_document_077.txt": {
+      "sha256": "bc1914db480563954140a258c1b51cfb260ba2fcf245ca308b1f16bb41dd758c",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:01.316497+00:00"
+    },
+    "txt/incremental_test/test_document_078.txt": {
+      "sha256": "384629ab93ee0902194c241bdfee0a23f45528b08a7cdacb9a98aeba66ff5c5d",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:01.878164+00:00"
+    },
+    "txt/incremental_test/test_document_079.txt": {
+      "sha256": "c6472f40b3db9598078916b2bd6edcf8afd70c4d9430282a35985ca01ca6ddb1",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:02.451545+00:00"
+    },
+    "txt/incremental_test/test_document_080.txt": {
+      "sha256": "4892476d73270a0b88b5acc812b9fad7290414914e439d3e750c3584dfb9a856",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:03.038051+00:00"
+    },
+    "txt/incremental_test/test_document_081.txt": {
+      "sha256": "d413d65b01d2176a23940be09d6de695d4b6611549abd68bc7cdf8057af228d2",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:03.658323+00:00"
+    },
+    "txt/incremental_test/test_document_082.txt": {
+      "sha256": "dc324bd20a6bbc97851210d49725bd11a3a1c68c198b41653572df5a57aa7757",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:04.300106+00:00"
+    },
+    "txt/incremental_test/test_document_083.txt": {
+      "sha256": "414bb16498432772027af686b9bfe6ed0194fd32f6b7ea1a0bdd2150a9543444",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:04.867984+00:00"
+    },
+    "txt/incremental_test/test_document_084.txt": {
+      "sha256": "1f8642304db4dda33570031d21e4696fb81ecf03aa95353fe2caa10094ef13b4",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:05.499253+00:00"
+    },
+    "txt/incremental_test/test_document_085.txt": {
+      "sha256": "0aff95174da7bcb45b6ae51617f33663dba00adb7f1c7e67d786ec55965d732b",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:06.178525+00:00"
+    },
+    "txt/incremental_test/test_document_086.txt": {
+      "sha256": "a7ffe41ab6d652f37dfd2ef460856b666f425be3654946e71de31084c41304f4",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:06.739626+00:00"
+    },
+    "txt/incremental_test/test_document_087.txt": {
+      "sha256": "4bf08c7d638eda08ad946b68920e037aaa86d3cf2ce7ae70fa3a2140847c798f",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:07.361772+00:00"
+    },
+    "txt/incremental_test/test_document_088.txt": {
+      "sha256": "cb7be63fdf499cf3925263fa3f6e75dc01a1415541b7b39d211c5a4c6f22fdda",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:07.965841+00:00"
+    },
+    "txt/incremental_test/test_document_089.txt": {
+      "sha256": "f06d5e09881b5a6bad67fee9727dae765059267661a8a492485776bb6befb8ec",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:08.527632+00:00"
+    },
+    "txt/incremental_test/test_document_090.txt": {
+      "sha256": "006a8f188b9b364e474dd0fd0771ac3aad50187cbaf07a2624ec61dd8adf7fb7",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:09.105985+00:00"
+    },
+    "txt/incremental_test/test_document_091.txt": {
+      "sha256": "6b9cc88280ef9a57df65e5ecce4fac53d4b8fccad97dbe0f6b04a85cfcf2f79d",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:09.707133+00:00"
+    },
+    "txt/incremental_test/test_document_092.txt": {
+      "sha256": "b5f49352c01fe84c6e7652e4a95eef8c6825cb426685f10a7da03668ddae0628",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:10.296128+00:00"
+    },
+    "txt/incremental_test/test_document_093.txt": {
+      "sha256": "4c73b72b0c757b6ffde650fe8045eb68a13c2e6af9c98afea8dc17a2b5e5af76",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:10.899640+00:00"
+    },
+    "txt/incremental_test/test_document_094.txt": {
+      "sha256": "da9dfa5dfdf1b6ea3f651ef852ebfab4acdbd392ac865aa37068a6c585571f29",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:11.482306+00:00"
+    },
+    "txt/incremental_test/test_document_095.txt": {
+      "sha256": "00bebf2da80539fee2b16e5b798700264ef8417a9200c51a4d603f640a2c1346",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:12.176965+00:00"
+    },
+    "txt/incremental_test/test_document_096.txt": {
+      "sha256": "e7b430d390bae0d6665d8580a13a0def061a6fad088f2593dcc85021e0605e6f",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:12.754790+00:00"
+    },
+    "txt/incremental_test/test_document_097.txt": {
+      "sha256": "b243819c0d6f4ad0451fb00d33cfb89cd99f018c7c8c040a512ab238a809fd4c",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:13.311831+00:00"
+    },
+    "txt/incremental_test/test_document_098.txt": {
+      "sha256": "391852b1950d901de0abc5f5e1cacd7d4ba3b4cca7029b147742f2bb10cb70d9",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:13.934963+00:00"
+    },
+    "txt/incremental_test/test_document_099.txt": {
+      "sha256": "373d6d1c8c49795ade4ec1eb75da43ccc7ba7ef6d07a8ca825916d7d982077ba",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:14.517153+00:00"
+    },
+    "txt/incremental_test/test_document_100.txt": {
+      "sha256": "fc38c5a1f22655da529d79d3f7b16299703c66469d15531fdbb6eb0c3abd3557",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T04:53:15.113074+00:00"
+    },
+    "txt/update_recovery_test.txt": {
+      "sha256": "90ff9330784961a9c6160edde43748b0cacd3edb0257b1e56e089cc5c7960ed5",
+      "chunks": 1,
+      "indexed_at": "2026-11-11T05:34:05.330109+00:00"
+    }
+  }
+}

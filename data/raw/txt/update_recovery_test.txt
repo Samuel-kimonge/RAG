@@ -1,0 +1,16 @@
+NexaTech Document Update and Recovery Test
+
+Document ID: UPDATE-RECOVERY-001
+
+Department: Machine Learning Engineering
+System: Production RAG
+Version: 3
+
+This is version three of the test document.
+
+It introduces updated information about model evaluation,
+vector databases, retrieval optimization, embedding pipelines,
+and production monitoring.
+
+The ingestion system must preserve the previously indexed
+version if embedding generation fails.

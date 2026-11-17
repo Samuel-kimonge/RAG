@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RAG Retrieval Evaluation Dataset",
+  "type": "object",
+  "required": [
+    "version",
+    "name",
+    "collection",
+    "allowed_sources",
+    "relevance_scale",
+    "test_cases"
+  ],
+  "properties": {
+    "version": {"type": "string"},
+    "name": {"type": "string"},
+    "description": {"type": "string"},
+    "collection": {"type": "string"},
+    "embedding_model": {"type": "string"},
+    "allowed_sources": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "relevance_scale": {
+      "type": "object",
+      "additionalProperties": {"type": "string"}
+    },
+    "test_cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "query", "category", "answerable", "relevant_chunks"],
+        "properties": {
+          "id": {"type": "string"},
+          "query": {"type": "string"},
+          "category": {"type": "string"},
+          "answerable": {"type": "boolean"},
+          "relevant_chunks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["chunk_id", "relevance"],
+              "properties": {
+                "chunk_id": {"type": "string", "minLength": 64, "maxLength": 64},
+                "relevance": {"type": "integer", "minimum": 1, "maximum": 2}
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

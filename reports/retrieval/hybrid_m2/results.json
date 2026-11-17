@@ -1,0 +1,3913 @@
+{
+  "dataset_name": "NexaTech retrieval baseline",
+  "dataset_version": "1.0.0",
+  "collection": "knowledge_base",
+  "embedding_model": "nomic-embed-text",
+  "k_values": [
+    1,
+    3,
+    5,
+    10
+  ],
+  "summary": {
+    "total_queries": 24,
+    "successful_queries": 24,
+    "failed_queries": 0,
+    "answerable_queries": 22,
+    "unanswerable_queries": 2,
+    "ranking_metrics": {
+      "1": {
+        "precision": 1.0,
+        "recall": 0.8333333333333333,
+        "mrr": 1.0,
+        "ndcg": 0.9696969696969696,
+        "hit_rate": 1.0
+      },
+      "3": {
+        "precision": 0.4393939393939394,
+        "recall": 0.9772727272727273,
+        "mrr": 1.0,
+        "ndcg": 0.9828610108235939,
+        "hit_rate": 1.0
+      },
+      "5": {
+        "precision": 0.2727272727272727,
+        "recall": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9882525244340951,
+        "hit_rate": 1.0
+      },
+      "10": {
+        "precision": 0.13636363636363635,
+        "recall": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9882525244340951,
+        "hit_rate": 1.0
+      }
+    },
+    "unanswerable": {
+      "successful_queries": 2,
+      "queries_returning_results": 2,
+      "queries_returning_no_results": 0,
+      "nonempty_result_rate": 1.0
+    },
+    "latency_ms": {
+      "mean": 194.59986325015657,
+      "p50": 194.60574699951394,
+      "p95": 238.22961440146173,
+      "p99": 279.945302390297,
+      "max": 291.998890999821
+    },
+    "empty_result_rate": 0.0,
+    "category_summary": {
+      "api": {
+        "total_queries": 2,
+        "successful_queries": 2,
+        "answerable_queries": 2,
+        "metrics": {
+          "1": {
+            "precision": 1.0,
+            "recall": 0.5,
+            "mrr": 1.0,
+            "ndcg": 0.6666666666666666,
+            "hit_rate": 1.0
+          },
+          "3": {
+            "precision": 0.6666666666666666,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 0.8983537904952533,
+            "hit_rate": 1.0
+          },
+          "5": {
+            "precision": 0.4,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 0.8983537904952533,
+            "hit_rate": 1.0
+          },
+          "10": {
+            "precision": 0.2,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 0.8983537904952533,
+            "hit_rate": 1.0
+          }
+        }
+      },
+      "data_policy": {
+        "total_queries": 1,
+        "successful_queries": 1,
+        "answerable_queries": 1,
+        "metrics": {
+          "1": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "3": {
+            "precision": 0.3333333333333333,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "5": {
+            "precision": 0.2,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "10": {
+            "precision": 0.1,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          }
+        }
+      },
+      "finance_policy": {
+        "total_queries": 1,
+        "successful_queries": 1,
+        "answerable_queries": 1,
+        "metrics": {
+          "1": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "3": {
+            "precision": 0.3333333333333333,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "5": {
+            "precision": 0.2,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "10": {
+            "precision": 0.1,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          }
+        }
+      },
+      "hr_policy": {
+        "total_queries": 2,
+        "successful_queries": 2,
+        "answerable_queries": 2,
+        "metrics": {
+          "1": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "3": {
+            "precision": 0.3333333333333333,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "5": {
+            "precision": 0.2,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "10": {
+            "precision": 0.1,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          }
+        }
+      },
+      "inventory": {
+        "total_queries": 3,
+        "successful_queries": 3,
+        "answerable_queries": 3,
+        "metrics": {
+          "1": {
+            "precision": 1.0,
+            "recall": 0.611111111111111,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "3": {
+            "precision": 0.6666666666666666,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "5": {
+            "precision": 0.39999999999999997,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "10": {
+            "precision": 0.19999999999999998,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          }
+        }
+      },
+      "operations": {
+        "total_queries": 2,
+        "successful_queries": 2,
+        "answerable_queries": 2,
+        "metrics": {
+          "1": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "3": {
+            "precision": 0.3333333333333333,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "5": {
+            "precision": 0.2,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "10": {
+            "precision": 0.1,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          }
+        }
+      },
+      "out_of_scope": {
+        "total_queries": 2,
+        "successful_queries": 2,
+        "answerable_queries": 0,
+        "metrics": {
+          "1": {
+            "precision": null,
+            "recall": null,
+            "mrr": null,
+            "ndcg": null,
+            "hit_rate": null
+          },
+          "3": {
+            "precision": null,
+            "recall": null,
+            "mrr": null,
+            "ndcg": null,
+            "hit_rate": null
+          },
+          "5": {
+            "precision": null,
+            "recall": null,
+            "mrr": null,
+            "ndcg": null,
+            "hit_rate": null
+          },
+          "10": {
+            "precision": null,
+            "recall": null,
+            "mrr": null,
+            "ndcg": null,
+            "hit_rate": null
+          }
+        }
+      },
+      "product": {
+        "total_queries": 2,
+        "successful_queries": 2,
+        "answerable_queries": 2,
+        "metrics": {
+          "1": {
+            "precision": 1.0,
+            "recall": 0.5,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "3": {
+            "precision": 0.5,
+            "recall": 0.75,
+            "mrr": 1.0,
+            "ndcg": 0.91311732856428,
+            "hit_rate": 1.0
+          },
+          "5": {
+            "precision": 0.4,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 0.972423978279793,
+            "hit_rate": 1.0
+          },
+          "10": {
+            "precision": 0.2,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 0.972423978279793,
+            "hit_rate": 1.0
+          }
+        }
+      },
+      "project_report": {
+        "total_queries": 1,
+        "successful_queries": 1,
+        "answerable_queries": 1,
+        "metrics": {
+          "1": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "3": {
+            "precision": 0.3333333333333333,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "5": {
+            "precision": 0.2,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "10": {
+            "precision": 0.1,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          }
+        }
+      },
+      "sales": {
+        "total_queries": 1,
+        "successful_queries": 1,
+        "answerable_queries": 1,
+        "metrics": {
+          "1": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "3": {
+            "precision": 0.3333333333333333,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "5": {
+            "precision": 0.2,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "10": {
+            "precision": 0.1,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          }
+        }
+      },
+      "security": {
+        "total_queries": 2,
+        "successful_queries": 2,
+        "answerable_queries": 2,
+        "metrics": {
+          "1": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "3": {
+            "precision": 0.3333333333333333,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "5": {
+            "precision": 0.2,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "10": {
+            "precision": 0.1,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          }
+        }
+      },
+      "support_policy": {
+        "total_queries": 1,
+        "successful_queries": 1,
+        "answerable_queries": 1,
+        "metrics": {
+          "1": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "3": {
+            "precision": 0.3333333333333333,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "5": {
+            "precision": 0.2,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "10": {
+            "precision": 0.1,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          }
+        }
+      },
+      "support_ticket": {
+        "total_queries": 3,
+        "successful_queries": 3,
+        "answerable_queries": 3,
+        "metrics": {
+          "1": {
+            "precision": 1.0,
+            "recall": 0.8333333333333334,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "3": {
+            "precision": 0.4444444444444444,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "5": {
+            "precision": 0.26666666666666666,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "10": {
+            "precision": 0.13333333333333333,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          }
+        }
+      },
+      "training": {
+        "total_queries": 1,
+        "successful_queries": 1,
+        "answerable_queries": 1,
+        "metrics": {
+          "1": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "3": {
+            "precision": 0.3333333333333333,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "5": {
+            "precision": 0.2,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "10": {
+            "precision": 0.1,
+            "recall": 1.0,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          }
+        }
+      }
+    }
+  },
+  "queries": [
+    {
+      "id": "inventory-001",
+      "query": "Which assets are located at the Nairobi office?",
+      "category": "inventory",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 167.22520999974222,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "6574131a9d5fa5a4fce8056ae33e3c778b01453e5b389bcf7c025fc77a577204",
+          "distance": 0.288932204246521,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.032266458495966696,
+          "dense_rank": 3,
+          "sparse_rank": 1,
+          "bm25_score": -10.278305627125224
+        },
+        {
+          "rank": 2,
+          "chunk_id": "78d482b07232859d156c1cf1dcbb910e0b567ca8c8196dcad864ee277afb7255",
+          "distance": 0.23399144411087036,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.032266458495966696,
+          "dense_rank": 1,
+          "sparse_rank": 3,
+          "bm25_score": -10.278305627125224
+        },
+        {
+          "rank": 3,
+          "chunk_id": "6cd5989c6acfa8bdd72d9ff8bd2a12fc1a01176dc444d1905ddd4c5357f64199",
+          "distance": 0.2661815881729126,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.03225806451612903,
+          "dense_rank": 2,
+          "sparse_rank": 2,
+          "bm25_score": -10.278305627125224
+        },
+        {
+          "rank": 4,
+          "chunk_id": "0ff69ca2b055e17ea2d753ccb86d8ad096b5a08bde92df3027bce4b9f97e577d",
+          "distance": 0.5223363637924194,
+          "source": "docx/NexaTech_Employee_Handbook.docx",
+          "fused_score": 0.029513888888888888,
+          "dense_rank": 12,
+          "sparse_rank": 4,
+          "bm25_score": -4.2040407561993725
+        },
+        {
+          "rank": 5,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.4903465509414673,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.029437229437229435,
+          "dense_rank": 10,
+          "sparse_rank": 6,
+          "bm25_score": -3.7905169321456906
+        },
+        {
+          "rank": 6,
+          "chunk_id": "db04399b3712034dd7215840ff33c8dce425f7911abb1db07a07811c27490b7b",
+          "distance": 0.5262929201126099,
+          "source": "pdf/NexaTech_IT_Security_Policy.pdf",
+          "fused_score": 0.02871794871794872,
+          "dense_rank": 15,
+          "sparse_rank": 5,
+          "bm25_score": -3.832978255393476
+        },
+        {
+          "rank": 7,
+          "chunk_id": "888e793bfc4d06a0f43342a5624bae6384f9e31b745201564303741af23b9361",
+          "distance": 0.5481702089309692,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.027912386121341344,
+          "dense_rank": 17,
+          "sparse_rank": 7,
+          "bm25_score": -3.195285035841025
+        },
+        {
+          "rank": 8,
+          "chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508",
+          "distance": 0.47861248254776,
+          "source": "docx/NexaTech_Product_FAQ.docx",
+          "fused_score": 0.02786377708978328,
+          "dense_rank": 8,
+          "sparse_rank": 16,
+          "bm25_score": -2.4427302408616565
+        },
+        {
+          "rank": 9,
+          "chunk_id": "5651a8cf5a50dbe6ec2098da505c3539c70bc9643dc3857c78dcbe21f7121548",
+          "distance": 0.48738759756088257,
+          "source": "docx/NexaTech_Finance_Expense_Policy.docx",
+          "fused_score": 0.027479766610201392,
+          "dense_rank": 9,
+          "sparse_rank": 17,
+          "bm25_score": -2.3090596776215944
+        },
+        {
+          "rank": 10,
+          "chunk_id": "d31bf346d5a21a716d5d4430f86cf076323b4c0501c14897db8191d15e5a43ef",
+          "distance": 0.5543201565742493,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.027205882352941177,
+          "dense_rank": 20,
+          "sparse_rank": 8,
+          "bm25_score": -3.1690389558757532
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.6,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.3,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "inventory-002",
+      "query": "Where is asset NX-006 assigned and what type of asset is it?",
+      "category": "inventory",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 217.26777699950617,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "d18d91c73e19cdaa3025de6c01d8f60a0bd35c06635351e44996073c86e309c8",
+          "distance": 0.17741340398788452,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -21.229376586571394
+        },
+        {
+          "rank": 2,
+          "chunk_id": "1e70d6d9aedd59e05be6def2d30dfbf1263f19ff527a35753b331b4a9304dc45",
+          "distance": 0.22913938760757446,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.0315136476426799,
+          "dense_rank": 2,
+          "sparse_rank": 5,
+          "bm25_score": -15.42259457059453
+        },
+        {
+          "rank": 3,
+          "chunk_id": "137fc62a0d2777eec65400aa0b06f010db25d22e7fddfe2695a336e63de1c648",
+          "distance": 0.2352372407913208,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.03149801587301587,
+          "dense_rank": 3,
+          "sparse_rank": 4,
+          "bm25_score": -15.42259457059453
+        },
+        {
+          "rank": 4,
+          "chunk_id": "3a9418cab720c6a8a887630e01af98f9557d58ee97778aa5cf10a238337e1e91",
+          "distance": 0.24152815341949463,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.03149801587301587,
+          "dense_rank": 4,
+          "sparse_rank": 3,
+          "bm25_score": -15.54561546251952
+        },
+        {
+          "rank": 5,
+          "chunk_id": "6574131a9d5fa5a4fce8056ae33e3c778b01453e5b389bcf7c025fc77a577204",
+          "distance": 0.26378464698791504,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.03128054740957967,
+          "dense_rank": 6,
+          "sparse_rank": 2,
+          "bm25_score": -19.640576175898843
+        },
+        {
+          "rank": 6,
+          "chunk_id": "78d482b07232859d156c1cf1dcbb910e0b567ca8c8196dcad864ee277afb7255",
+          "distance": 0.25836658477783203,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.030309988518943745,
+          "dense_rank": 5,
+          "sparse_rank": 7,
+          "bm25_score": -15.42259457059453
+        },
+        {
+          "rank": 7,
+          "chunk_id": "6cd5989c6acfa8bdd72d9ff8bd2a12fc1a01176dc444d1905ddd4c5357f64199",
+          "distance": 0.29033559560775757,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.03007688828584351,
+          "dense_rank": 7,
+          "sparse_rank": 6,
+          "bm25_score": -15.42259457059453
+        },
+        {
+          "rank": 8,
+          "chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616",
+          "distance": 0.4208269715309143,
+          "source": "pdf/NexaTech_Cloud_Operations_Runbook.pdf",
+          "fused_score": 0.02817460317460317,
+          "dense_rank": 10,
+          "sparse_rank": 12,
+          "bm25_score": -5.507953508110472
+        },
+        {
+          "rank": 9,
+          "chunk_id": "365ff3d8bc2d64fcf6e19a5b802b893d54d3857cad17a314566de04718ef2ca8",
+          "distance": 0.4019659161567688,
+          "source": "txt/incremental_test/test_document_006.txt",
+          "fused_score": 0.02803921568627451,
+          "dense_rank": 8,
+          "sparse_rank": 15,
+          "bm25_score": -3.904734179083752
+        },
+        {
+          "rank": 10,
+          "chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508",
+          "distance": 0.40361839532852173,
+          "source": "docx/NexaTech_Product_FAQ.docx",
+          "fused_score": 0.028006267136701922,
+          "dense_rank": 9,
+          "sparse_rank": 14,
+          "bm25_score": -3.982622498244547
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "inventory-003",
+      "query": "What is the status and location of the two server assets?",
+      "category": "inventory",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 203.04516199757927,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "137fc62a0d2777eec65400aa0b06f010db25d22e7fddfe2695a336e63de1c648",
+          "distance": 0.34247153997421265,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.03252247488101534,
+          "dense_rank": 2,
+          "sparse_rank": 1,
+          "bm25_score": -8.769110316972576
+        },
+        {
+          "rank": 2,
+          "chunk_id": "1e70d6d9aedd59e05be6def2d30dfbf1263f19ff527a35753b331b4a9304dc45",
+          "distance": 0.3411043882369995,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.03252247488101534,
+          "dense_rank": 1,
+          "sparse_rank": 2,
+          "bm25_score": -8.769110316972576
+        },
+        {
+          "rank": 3,
+          "chunk_id": "3a9418cab720c6a8a887630e01af98f9557d58ee97778aa5cf10a238337e1e91",
+          "distance": 0.3583793640136719,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.03125763125763126,
+          "dense_rank": 3,
+          "sparse_rank": 5,
+          "bm25_score": -4.037801841232856
+        },
+        {
+          "rank": 4,
+          "chunk_id": "d18d91c73e19cdaa3025de6c01d8f60a0bd35c06635351e44996073c86e309c8",
+          "distance": 0.3618471622467041,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.030776515151515152,
+          "dense_rank": 4,
+          "sparse_rank": 6,
+          "bm25_score": -4.037801841232856
+        },
+        {
+          "rank": 5,
+          "chunk_id": "6574131a9d5fa5a4fce8056ae33e3c778b01453e5b389bcf7c025fc77a577204",
+          "distance": 0.3854140639305115,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.030309988518943745,
+          "dense_rank": 5,
+          "sparse_rank": 7,
+          "bm25_score": -4.0013409362398065
+        },
+        {
+          "rank": 6,
+          "chunk_id": "78d482b07232859d156c1cf1dcbb910e0b567ca8c8196dcad864ee277afb7255",
+          "distance": 0.38715046644210815,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.02964426877470356,
+          "dense_rank": 6,
+          "sparse_rank": 9,
+          "bm25_score": -4.0013409362398065
+        },
+        {
+          "rank": 7,
+          "chunk_id": "6cd5989c6acfa8bdd72d9ff8bd2a12fc1a01176dc444d1905ddd4c5357f64199",
+          "distance": 0.4023866057395935,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.029631255487269532,
+          "dense_rank": 7,
+          "sparse_rank": 8,
+          "bm25_score": -4.0013409362398065
+        },
+        {
+          "rank": 8,
+          "chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616",
+          "distance": 0.498104989528656,
+          "source": "pdf/NexaTech_Cloud_Operations_Runbook.pdf",
+          "fused_score": 0.0293236301369863,
+          "dense_rank": 13,
+          "sparse_rank": 4,
+          "bm25_score": -4.102423679130202
+        },
+        {
+          "rank": 9,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.5171947479248047,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.028693528693528692,
+          "dense_rank": 18,
+          "sparse_rank": 3,
+          "bm25_score": -4.912846931828877
+        },
+        {
+          "rank": 10,
+          "chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508",
+          "distance": 0.4529993534088135,
+          "source": "docx/NexaTech_Product_FAQ.docx",
+          "fused_score": 0.02803921568627451,
+          "dense_rank": 8,
+          "sparse_rank": 15,
+          "bm25_score": -2.3329965332438105
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.6666666666666666,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "ticket-001",
+      "query": "How was the repeated 429 API response issue resolved?",
+      "category": "support_ticket",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 159.5677830009663,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "1c44b2447282497014b598a48e5893b62eee9cf91d7d7287fc5fbf3194f6d9db",
+          "distance": 0.21853506565093994,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -18.009058206509625
+        },
+        {
+          "rank": 2,
+          "chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b",
+          "distance": 0.42643123865127563,
+          "source": "pdf/NexaTech_API_Integration_Guide.pdf",
+          "fused_score": 0.031754032258064516,
+          "dense_rank": 4,
+          "sparse_rank": 2,
+          "bm25_score": -11.20532187569346
+        },
+        {
+          "rank": 3,
+          "chunk_id": "021c5d85eea5655d7a24b276574608adbe29b173e514ade0b5ebc2cefc74ad8a",
+          "distance": 0.36270010471343994,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.0315136476426799,
+          "dense_rank": 2,
+          "sparse_rank": 5,
+          "bm25_score": -7.060128591606972
+        },
+        {
+          "rank": 4,
+          "chunk_id": "2eeca668d77834fbc2776fc4fb79879acdb4f75e57912f671190003f5e243463",
+          "distance": 0.387424111366272,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03149801587301587,
+          "dense_rank": 3,
+          "sparse_rank": 4,
+          "bm25_score": -7.175167492625965
+        },
+        {
+          "rank": 5,
+          "chunk_id": "57be25d74024ce9a1ef47bada6e17e7b49f57cd14e65465a07fc6e5290c5a429",
+          "distance": 0.4744580388069153,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03057889822595705,
+          "dense_rank": 8,
+          "sparse_rank": 3,
+          "bm25_score": -8.225002733356721
+        },
+        {
+          "rank": 6,
+          "chunk_id": "888e793bfc4d06a0f43342a5624bae6384f9e31b745201564303741af23b9361",
+          "distance": 0.46109557151794434,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.029437229437229435,
+          "dense_rank": 6,
+          "sparse_rank": 10,
+          "bm25_score": -3.195285035841025
+        },
+        {
+          "rank": 7,
+          "chunk_id": "fee06a02ce34e10e9db9e6606778c0d0014a65c236af3c60117575f79d8a9f68",
+          "distance": 0.42976951599121094,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.029273504273504274,
+          "dense_rank": 5,
+          "sparse_rank": 12,
+          "bm25_score": -3.1690389558757532
+        },
+        {
+          "rank": 8,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.4953475594520569,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.029236022193768675,
+          "dense_rank": 11,
+          "sparse_rank": 6,
+          "bm25_score": -6.950012152934079
+        },
+        {
+          "rank": 9,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.4865351915359497,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.029211087420042643,
+          "dense_rank": 10,
+          "sparse_rank": 7,
+          "bm25_score": -6.0199030302487255
+        },
+        {
+          "rank": 10,
+          "chunk_id": "d31bf346d5a21a716d5d4430f86cf076323b4c0501c14897db8191d15e5a43ef",
+          "distance": 0.4740869402885437,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.02900988017658188,
+          "dense_rank": 7,
+          "sparse_rank": 11,
+          "bm25_score": -3.1690389558757532
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "ticket-002",
+      "query": "What actions were taken after a suspected exposed API token?",
+      "category": "support_ticket",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 198.95614100096282,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "021c5d85eea5655d7a24b276574608adbe29b173e514ade0b5ebc2cefc74ad8a",
+          "distance": 0.28465574979782104,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -14.189573445071911
+        },
+        {
+          "rank": 2,
+          "chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b",
+          "distance": 0.391140341758728,
+          "source": "pdf/NexaTech_API_Integration_Guide.pdf",
+          "fused_score": 0.03200204813108039,
+          "dense_rank": 2,
+          "sparse_rank": 3,
+          "bm25_score": -4.518823574617249
+        },
+        {
+          "rank": 3,
+          "chunk_id": "1c44b2447282497014b598a48e5893b62eee9cf91d7d7287fc5fbf3194f6d9db",
+          "distance": 0.42477792501449585,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03149801587301587,
+          "dense_rank": 3,
+          "sparse_rank": 4,
+          "bm25_score": -4.0319469587548555
+        },
+        {
+          "rank": 4,
+          "chunk_id": "3a03fd81589880c046a11a1abf46bec9fadfbfc6b475b08411d2e117866242ce",
+          "distance": 0.46900659799575806,
+          "source": "pdf/NexaTech_Q3_Project_Report.pdf",
+          "fused_score": 0.03128054740957967,
+          "dense_rank": 6,
+          "sparse_rank": 2,
+          "bm25_score": -6.6909821677945835
+        },
+        {
+          "rank": 5,
+          "chunk_id": "2eeca668d77834fbc2776fc4fb79879acdb4f75e57912f671190003f5e243463",
+          "distance": 0.472392201423645,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.029877369007803793,
+          "dense_rank": 9,
+          "sparse_rank": 5,
+          "bm25_score": -4.0319469587548555
+        },
+        {
+          "rank": 6,
+          "chunk_id": "db04399b3712034dd7215840ff33c8dce425f7911abb1db07a07811c27490b7b",
+          "distance": 0.4558553099632263,
+          "source": "pdf/NexaTech_IT_Security_Policy.pdf",
+          "fused_score": 0.02946912242686891,
+          "dense_rank": 5,
+          "sparse_rank": 11,
+          "bm25_score": -2.7005696537099957
+        },
+        {
+          "rank": 7,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.4718237519264221,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.029211087420042643,
+          "dense_rank": 7,
+          "sparse_rank": 10,
+          "bm25_score": -2.7631169601060437
+        },
+        {
+          "rank": 8,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.4248599410057068,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.015625,
+          "dense_rank": 4,
+          "sparse_rank": null,
+          "bm25_score": null
+        },
+        {
+          "rank": 9,
+          "chunk_id": "14d1edaa8ec8b7a96a858dc84c8d84ccf89766ff1c2d4e8142a0b6f5fa7f3b16",
+          "distance": null,
+          "source": "txt/NexaTech_Sales_Onboarding.txt",
+          "fused_score": 0.015151515151515152,
+          "dense_rank": null,
+          "sparse_rank": 6,
+          "bm25_score": -3.294640352200692
+        },
+        {
+          "rank": 10,
+          "chunk_id": "5651a8cf5a50dbe6ec2098da505c3539c70bc9643dc3857c78dcbe21f7121548",
+          "distance": null,
+          "source": "docx/NexaTech_Finance_Expense_Policy.docx",
+          "fused_score": 0.014925373134328358,
+          "dense_rank": null,
+          "sparse_rank": 7,
+          "bm25_score": -3.1143519377945745
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "ticket-003",
+      "query": "How should an API client handle pagination so that it does not miss records?",
+      "category": "api",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 239.59198400189052,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "2eeca668d77834fbc2776fc4fb79879acdb4f75e57912f671190003f5e243463",
+          "distance": 0.2379852533340454,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -18.387176331296654
+        },
+        {
+          "rank": 2,
+          "chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b",
+          "distance": 0.3886008858680725,
+          "source": "pdf/NexaTech_API_Integration_Guide.pdf",
+          "fused_score": 0.03225806451612903,
+          "dense_rank": 2,
+          "sparse_rank": 2,
+          "bm25_score": -13.727558592923742
+        },
+        {
+          "rank": 3,
+          "chunk_id": "1c44b2447282497014b598a48e5893b62eee9cf91d7d7287fc5fbf3194f6d9db",
+          "distance": 0.3932551145553589,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.031746031746031744,
+          "dense_rank": 3,
+          "sparse_rank": 3,
+          "bm25_score": -8.668670545282948
+        },
+        {
+          "rank": 4,
+          "chunk_id": "57be25d74024ce9a1ef47bada6e17e7b49f57cd14e65465a07fc6e5290c5a429",
+          "distance": 0.42592179775238037,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03055037313432836,
+          "dense_rank": 4,
+          "sparse_rank": 7,
+          "bm25_score": -5.0817821994856125
+        },
+        {
+          "rank": 5,
+          "chunk_id": "6cb17bf20d0a7c1407095f40a6447d661aa569023c224093f268386d9383b5b6",
+          "distance": 0.4874849319458008,
+          "source": "pdf/NexaTech_Product_Atlas_Manual.pdf",
+          "fused_score": 0.029709507042253523,
+          "dense_rank": 11,
+          "sparse_rank": 4,
+          "bm25_score": -8.346485335242155
+        },
+        {
+          "rank": 6,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.47554945945739746,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.029437229437229435,
+          "dense_rank": 10,
+          "sparse_rank": 6,
+          "bm25_score": -6.286817801081669
+        },
+        {
+          "rank": 7,
+          "chunk_id": "021c5d85eea5655d7a24b276574608adbe29b173e514ade0b5ebc2cefc74ad8a",
+          "distance": 0.44642651081085205,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.029236022193768675,
+          "dense_rank": 6,
+          "sparse_rank": 11,
+          "bm25_score": -3.9673030675037158
+        },
+        {
+          "rank": 8,
+          "chunk_id": "3a03fd81589880c046a11a1abf46bec9fadfbfc6b475b08411d2e117866242ce",
+          "distance": 0.4987996816635132,
+          "source": "pdf/NexaTech_Q3_Project_Report.pdf",
+          "fused_score": 0.0288981288981289,
+          "dense_rank": 14,
+          "sparse_rank": 5,
+          "bm25_score": -6.956179951683795
+        },
+        {
+          "rank": 9,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.49465644359588623,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.02817460317460317,
+          "dense_rank": 12,
+          "sparse_rank": 10,
+          "bm25_score": -4.138446238963948
+        },
+        {
+          "rank": 10,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.507978081703186,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.027692895339954164,
+          "dense_rank": 17,
+          "sparse_rank": 8,
+          "bm25_score": -4.58531151605854
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.6666666666666666,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "ticket-004",
+      "query": "Which policy should an employee consult about an expense claim?",
+      "category": "support_ticket",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 195.02665699837962,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "888e793bfc4d06a0f43342a5624bae6384f9e31b745201564303741af23b9361",
+          "distance": 0.33388376235961914,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -25.443990656604196
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5651a8cf5a50dbe6ec2098da505c3539c70bc9643dc3857c78dcbe21f7121548",
+          "distance": 0.3424372673034668,
+          "source": "docx/NexaTech_Finance_Expense_Policy.docx",
+          "fused_score": 0.03225806451612903,
+          "dense_rank": 2,
+          "sparse_rank": 2,
+          "bm25_score": -12.163027770248174
+        },
+        {
+          "rank": 3,
+          "chunk_id": "0ff69ca2b055e17ea2d753ccb86d8ad096b5a08bde92df3027bce4b9f97e577d",
+          "distance": 0.39944279193878174,
+          "source": "docx/NexaTech_Employee_Handbook.docx",
+          "fused_score": 0.031746031746031744,
+          "dense_rank": 3,
+          "sparse_rank": 3,
+          "bm25_score": -8.998636632658995
+        },
+        {
+          "rank": 4,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.4009397029876709,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.031009615384615385,
+          "dense_rank": 4,
+          "sparse_rank": 5,
+          "bm25_score": -4.44564236140448
+        },
+        {
+          "rank": 5,
+          "chunk_id": "db04399b3712034dd7215840ff33c8dce425f7911abb1db07a07811c27490b7b",
+          "distance": 0.43357670307159424,
+          "source": "pdf/NexaTech_IT_Security_Policy.pdf",
+          "fused_score": 0.030090497737556562,
+          "dense_rank": 5,
+          "sparse_rank": 8,
+          "bm25_score": -3.4992987143901404
+        },
+        {
+          "rank": 6,
+          "chunk_id": "3a03fd81589880c046a11a1abf46bec9fadfbfc6b475b08411d2e117866242ce",
+          "distance": 0.52074134349823,
+          "source": "pdf/NexaTech_Q3_Project_Report.pdf",
+          "fused_score": 0.029709507042253523,
+          "dense_rank": 11,
+          "sparse_rank": 4,
+          "bm25_score": -6.956179951683795
+        },
+        {
+          "rank": 7,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.459109365940094,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.029437229437229435,
+          "dense_rank": 6,
+          "sparse_rank": 10,
+          "bm25_score": -2.29265575802927
+        },
+        {
+          "rank": 8,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.4771132469177246,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.02900988017658188,
+          "dense_rank": 7,
+          "sparse_rank": 11,
+          "bm25_score": -2.069223119481974
+        },
+        {
+          "rank": 9,
+          "chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616",
+          "distance": 0.5114055871963501,
+          "source": "pdf/NexaTech_Cloud_Operations_Runbook.pdf",
+          "fused_score": 0.028985507246376812,
+          "dense_rank": 9,
+          "sparse_rank": 9,
+          "bm25_score": -3.0765740057255018
+        },
+        {
+          "rank": 10,
+          "chunk_id": "010a566c348e3d877e401adb609706f37a2973e7297b84419d9a772d2dd04591",
+          "distance": null,
+          "source": "txt/update_recovery_test.txt",
+          "fused_score": 0.015151515151515152,
+          "dense_rank": null,
+          "sparse_rank": 6,
+          "bm25_score": -4.137860458009961
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.6666666666666666,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "support-001",
+      "query": "What is the first response target for a P1 support ticket?",
+      "category": "support_policy",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 216.16965300199809,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.3690708875656128,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -22.704729793830275
+        },
+        {
+          "rank": 2,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.41439974308013916,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.03128054740957967,
+          "dense_rank": 6,
+          "sparse_rank": 2,
+          "bm25_score": -10.665607043611603
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d31bf346d5a21a716d5d4430f86cf076323b4c0501c14897db8191d15e5a43ef",
+          "distance": 0.4088139533996582,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03125,
+          "dense_rank": 4,
+          "sparse_rank": 4,
+          "bm25_score": -7.985125538809126
+        },
+        {
+          "rank": 4,
+          "chunk_id": "021c5d85eea5655d7a24b276574608adbe29b173e514ade0b5ebc2cefc74ad8a",
+          "distance": 0.4130898714065552,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03076923076923077,
+          "dense_rank": 5,
+          "sparse_rank": 5,
+          "bm25_score": -7.793088195967857
+        },
+        {
+          "rank": 5,
+          "chunk_id": "c6706d1e132a432e6a959b5001e3c0efd59aa8d0dd3d6dc430e1af31968ae100",
+          "distance": 0.4489225745201111,
+          "source": "txt/NexaTech_Training_Catalog.txt",
+          "fused_score": 0.029631255487269532,
+          "dense_rank": 8,
+          "sparse_rank": 7,
+          "bm25_score": -6.366774732952136
+        },
+        {
+          "rank": 6,
+          "chunk_id": "888e793bfc4d06a0f43342a5624bae6384f9e31b745201564303741af23b9361",
+          "distance": 0.4022608995437622,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.029206349206349208,
+          "dense_rank": 3,
+          "sparse_rank": 15,
+          "bm25_score": -3.3377320321240886
+        },
+        {
+          "rank": 7,
+          "chunk_id": "1c44b2447282497014b598a48e5893b62eee9cf91d7d7287fc5fbf3194f6d9db",
+          "distance": 0.37276607751846313,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.029116045245077504,
+          "dense_rank": 2,
+          "sparse_rank": 17,
+          "bm25_score": -3.283346475276314
+        },
+        {
+          "rank": 8,
+          "chunk_id": "3a9418cab720c6a8a887630e01af98f9557d58ee97778aa5cf10a238337e1e91",
+          "distance": 0.4601045846939087,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.028577260665441927,
+          "dense_rank": 9,
+          "sparse_rank": 11,
+          "bm25_score": -4.509564258918789
+        },
+        {
+          "rank": 9,
+          "chunk_id": "2eeca668d77834fbc2776fc4fb79879acdb4f75e57912f671190003f5e243463",
+          "distance": 0.4308239221572876,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.027745885954841176,
+          "dense_rank": 7,
+          "sparse_rank": 18,
+          "bm25_score": -3.283346475276314
+        },
+        {
+          "rank": 10,
+          "chunk_id": "fee06a02ce34e10e9db9e6606778c0d0014a65c236af3c60117575f79d8a9f68",
+          "distance": 0.468635618686676,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.027242401779095628,
+          "dense_rank": 11,
+          "sparse_rank": 16,
+          "bm25_score": -3.3103158921443514
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "policy-001",
+      "query": "How long are closed support tickets and system audit logs retained?",
+      "category": "data_policy",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 193.42465700174216,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.37109410762786865,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -25.602590376079682
+        },
+        {
+          "rank": 2,
+          "chunk_id": "021c5d85eea5655d7a24b276574608adbe29b173e514ade0b5ebc2cefc74ad8a",
+          "distance": 0.3864070177078247,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03225806451612903,
+          "dense_rank": 2,
+          "sparse_rank": 2,
+          "bm25_score": -13.114958365712495
+        },
+        {
+          "rank": 3,
+          "chunk_id": "57be25d74024ce9a1ef47bada6e17e7b49f57cd14e65465a07fc6e5290c5a429",
+          "distance": 0.4591168165206909,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.031024531024531024,
+          "dense_rank": 6,
+          "sparse_rank": 3,
+          "bm25_score": -8.691932076298079
+        },
+        {
+          "rank": 4,
+          "chunk_id": "1c44b2447282497014b598a48e5893b62eee9cf91d7d7287fc5fbf3194f6d9db",
+          "distance": 0.4397713541984558,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.030158730158730156,
+          "dense_rank": 3,
+          "sparse_rank": 10,
+          "bm25_score": -3.610149876812467
+        },
+        {
+          "rank": 5,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.4687989354133606,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.030117753623188408,
+          "dense_rank": 9,
+          "sparse_rank": 4,
+          "bm25_score": -7.241050257268454
+        },
+        {
+          "rank": 6,
+          "chunk_id": "fee06a02ce34e10e9db9e6606778c0d0014a65c236af3c60117575f79d8a9f68",
+          "distance": 0.45490097999572754,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.029877369007803793,
+          "dense_rank": 5,
+          "sparse_rank": 9,
+          "bm25_score": -3.639803657708574
+        },
+        {
+          "rank": 7,
+          "chunk_id": "d31bf346d5a21a716d5d4430f86cf076323b4c0501c14897db8191d15e5a43ef",
+          "distance": 0.46012014150619507,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.029631255487269532,
+          "dense_rank": 7,
+          "sparse_rank": 8,
+          "bm25_score": -3.639803657708574
+        },
+        {
+          "rank": 8,
+          "chunk_id": "c6706d1e132a432e6a959b5001e3c0efd59aa8d0dd3d6dc430e1af31968ae100",
+          "distance": 0.49167829751968384,
+          "source": "txt/NexaTech_Training_Catalog.txt",
+          "fused_score": 0.02946912242686891,
+          "dense_rank": 11,
+          "sparse_rank": 5,
+          "bm25_score": -6.920766863821349
+        },
+        {
+          "rank": 9,
+          "chunk_id": "2eeca668d77834fbc2776fc4fb79879acdb4f75e57912f671190003f5e243463",
+          "distance": 0.4655908942222595,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.028790389395194696,
+          "dense_rank": 8,
+          "sparse_rank": 11,
+          "bm25_score": -3.6101485843385186
+        },
+        {
+          "rank": 10,
+          "chunk_id": "3a9418cab720c6a8a887630e01af98f9557d58ee97778aa5cf10a238337e1e91",
+          "distance": 0.5002648830413818,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.02862400327131466,
+          "dense_rank": 13,
+          "sparse_rank": 7,
+          "bm25_score": -4.509564258918789
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "policy-002",
+      "query": "How many working days in advance should employees submit planned leave requests?",
+      "category": "hr_policy",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 224.58447000099113,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "0ff69ca2b055e17ea2d753ccb86d8ad096b5a08bde92df3027bce4b9f97e577d",
+          "distance": 0.3583505153656006,
+          "source": "docx/NexaTech_Employee_Handbook.docx",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -33.095300519205836
+        },
+        {
+          "rank": 2,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.4639776349067688,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.031054405392392875,
+          "dense_rank": 2,
+          "sparse_rank": 7,
+          "bm25_score": -4.408156655504052
+        },
+        {
+          "rank": 3,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.49027448892593384,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.031024531024531024,
+          "dense_rank": 6,
+          "sparse_rank": 3,
+          "bm25_score": -6.286817801081669
+        },
+        {
+          "rank": 4,
+          "chunk_id": "c6706d1e132a432e6a959b5001e3c0efd59aa8d0dd3d6dc430e1af31968ae100",
+          "distance": 0.47564947605133057,
+          "source": "txt/NexaTech_Training_Catalog.txt",
+          "fused_score": 0.03057889822595705,
+          "dense_rank": 3,
+          "sparse_rank": 8,
+          "bm25_score": -4.057118211823779
+        },
+        {
+          "rank": 5,
+          "chunk_id": "5651a8cf5a50dbe6ec2098da505c3539c70bc9643dc3857c78dcbe21f7121548",
+          "distance": 0.4965769052505493,
+          "source": "docx/NexaTech_Finance_Expense_Policy.docx",
+          "fused_score": 0.03055037313432836,
+          "dense_rank": 7,
+          "sparse_rank": 4,
+          "bm25_score": -5.445407873719728
+        },
+        {
+          "rank": 6,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.4974929690361023,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.029857397504456328,
+          "dense_rank": 8,
+          "sparse_rank": 6,
+          "bm25_score": -4.884144993057358
+        },
+        {
+          "rank": 7,
+          "chunk_id": "3a03fd81589880c046a11a1abf46bec9fadfbfc6b475b08411d2e117866242ce",
+          "distance": 0.4983254671096802,
+          "source": "pdf/NexaTech_Q3_Project_Report.pdf",
+          "fused_score": 0.028985507246376812,
+          "dense_rank": 9,
+          "sparse_rank": 9,
+          "bm25_score": -2.350335741090449
+        },
+        {
+          "rank": 8,
+          "chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b",
+          "distance": 0.5834981203079224,
+          "source": "pdf/NexaTech_API_Integration_Guide.pdf",
+          "fused_score": 0.028629032258064516,
+          "dense_rank": 20,
+          "sparse_rank": 2,
+          "bm25_score": -6.395779410537671
+        },
+        {
+          "rank": 9,
+          "chunk_id": "3a9418cab720c6a8a887630e01af98f9557d58ee97778aa5cf10a238337e1e91",
+          "distance": 0.5699987411499023,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.027106227106227107,
+          "dense_rank": 18,
+          "sparse_rank": 10,
+          "bm25_score": -1.4455781245094656e-06
+        },
+        {
+          "rank": 10,
+          "chunk_id": "d18d91c73e19cdaa3025de6c01d8f60a0bd35c06635351e44996073c86e309c8",
+          "distance": 0.5667302012443542,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.027071520029266508,
+          "dense_rank": 17,
+          "sparse_rank": 11,
+          "bm25_score": -1.4455781245094656e-06
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "policy-003",
+      "query": "How many days per week may eligible employees work remotely?",
+      "category": "hr_policy",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 211.00622200174257,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "0ff69ca2b055e17ea2d753ccb86d8ad096b5a08bde92df3027bce4b9f97e577d",
+          "distance": 0.34848570823669434,
+          "source": "docx/NexaTech_Employee_Handbook.docx",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -27.79452908222238
+        },
+        {
+          "rank": 2,
+          "chunk_id": "c6706d1e132a432e6a959b5001e3c0efd59aa8d0dd3d6dc430e1af31968ae100",
+          "distance": 0.44595515727996826,
+          "source": "txt/NexaTech_Training_Catalog.txt",
+          "fused_score": 0.03200204813108039,
+          "dense_rank": 2,
+          "sparse_rank": 3,
+          "bm25_score": -8.114236423647558
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5651a8cf5a50dbe6ec2098da505c3539c70bc9643dc3857c78dcbe21f7121548",
+          "distance": 0.4921989440917969,
+          "source": "docx/NexaTech_Finance_Expense_Policy.docx",
+          "fused_score": 0.031054405392392875,
+          "dense_rank": 7,
+          "sparse_rank": 2,
+          "bm25_score": -9.191865753143102
+        },
+        {
+          "rank": 4,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.4853193163871765,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.029877369007803793,
+          "dense_rank": 5,
+          "sparse_rank": 9,
+          "bm25_score": -2.3389335360220778
+        },
+        {
+          "rank": 5,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.5071563720703125,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.029273504273504274,
+          "dense_rank": 12,
+          "sparse_rank": 5,
+          "bm25_score": -5.182978470056177
+        },
+        {
+          "rank": 6,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.5078115463256836,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.029138513513513514,
+          "dense_rank": 14,
+          "sparse_rank": 4,
+          "bm25_score": -6.070060578353511
+        },
+        {
+          "rank": 7,
+          "chunk_id": "6cb17bf20d0a7c1407095f40a6447d661aa569023c224093f268386d9383b5b6",
+          "distance": 0.5307630300521851,
+          "source": "pdf/NexaTech_Product_Atlas_Manual.pdf",
+          "fused_score": 0.027364110201042444,
+          "dense_rank": 19,
+          "sparse_rank": 8,
+          "bm25_score": -2.726443442355038
+        },
+        {
+          "rank": 8,
+          "chunk_id": "14d1edaa8ec8b7a96a858dc84c8d84ccf89766ff1c2d4e8142a0b6f5fa7f3b16",
+          "distance": 0.4733656644821167,
+          "source": "txt/NexaTech_Sales_Onboarding.txt",
+          "fused_score": 0.015873015873015872,
+          "dense_rank": 3,
+          "sparse_rank": null,
+          "bm25_score": null
+        },
+        {
+          "rank": 9,
+          "chunk_id": "d18d91c73e19cdaa3025de6c01d8f60a0bd35c06635351e44996073c86e309c8",
+          "distance": 0.47702449560165405,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.015625,
+          "dense_rank": 4,
+          "sparse_rank": null,
+          "bm25_score": null
+        },
+        {
+          "rank": 10,
+          "chunk_id": "57be25d74024ce9a1ef47bada6e17e7b49f57cd14e65465a07fc6e5290c5a429",
+          "distance": null,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.015151515151515152,
+          "dense_rank": null,
+          "sparse_rank": 6,
+          "bm25_score": -5.0817821994856125
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "policy-004",
+      "query": "What approval is required for an expense above 200 fictional currency units?",
+      "category": "finance_policy",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 207.57796600082656,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "5651a8cf5a50dbe6ec2098da505c3539c70bc9643dc3857c78dcbe21f7121548",
+          "distance": 0.28986120223999023,
+          "source": "docx/NexaTech_Finance_Expense_Policy.docx",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -38.63206400584372
+        },
+        {
+          "rank": 2,
+          "chunk_id": "db04399b3712034dd7215840ff33c8dce425f7911abb1db07a07811c27490b7b",
+          "distance": 0.4565618634223938,
+          "source": "pdf/NexaTech_IT_Security_Policy.pdf",
+          "fused_score": 0.031746031746031744,
+          "dense_rank": 3,
+          "sparse_rank": 3,
+          "bm25_score": -9.75038465666245
+        },
+        {
+          "rank": 3,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.4630618095397949,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.031009615384615385,
+          "dense_rank": 4,
+          "sparse_rank": 5,
+          "bm25_score": -8.34055923781815
+        },
+        {
+          "rank": 4,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.4705091714859009,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.030309988518943745,
+          "dense_rank": 5,
+          "sparse_rank": 7,
+          "bm25_score": -7.628801140543977
+        },
+        {
+          "rank": 5,
+          "chunk_id": "888e793bfc4d06a0f43342a5624bae6384f9e31b745201564303741af23b9361",
+          "distance": 0.4518324136734009,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.030017921146953404,
+          "dense_rank": 2,
+          "sparse_rank": 12,
+          "bm25_score": -5.165957158412199
+        },
+        {
+          "rank": 6,
+          "chunk_id": "3a03fd81589880c046a11a1abf46bec9fadfbfc6b475b08411d2e117866242ce",
+          "distance": 0.5101509094238281,
+          "source": "pdf/NexaTech_Q3_Project_Report.pdf",
+          "fused_score": 0.029513888888888888,
+          "dense_rank": 12,
+          "sparse_rank": 4,
+          "bm25_score": -9.019270380234902
+        },
+        {
+          "rank": 7,
+          "chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508",
+          "distance": 0.4960048794746399,
+          "source": "docx/NexaTech_Product_FAQ.docx",
+          "fused_score": 0.02919863597612958,
+          "dense_rank": 8,
+          "sparse_rank": 9,
+          "bm25_score": -7.294343084982872
+        },
+        {
+          "rank": 8,
+          "chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b",
+          "distance": 0.47114264965057373,
+          "source": "pdf/NexaTech_API_Integration_Guide.pdf",
+          "fused_score": 0.028850145288501453,
+          "dense_rank": 6,
+          "sparse_rank": 13,
+          "bm25_score": -4.022459374827062
+        },
+        {
+          "rank": 9,
+          "chunk_id": "6cb17bf20d0a7c1407095f40a6447d661aa569023c224093f268386d9383b5b6",
+          "distance": 0.4960801601409912,
+          "source": "pdf/NexaTech_Product_Atlas_Manual.pdf",
+          "fused_score": 0.028577260665441927,
+          "dense_rank": 9,
+          "sparse_rank": 11,
+          "bm25_score": -6.6548742176345534
+        },
+        {
+          "rank": 10,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.5249254703521729,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.027972027972027972,
+          "dense_rank": 18,
+          "sparse_rank": 6,
+          "bm25_score": -8.284011538629079
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "api-001",
+      "query": "What is the standard API rate limit per token and what does HTTP 429 mean?",
+      "category": "api",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 291.998890999821,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "1c44b2447282497014b598a48e5893b62eee9cf91d7d7287fc5fbf3194f6d9db",
+          "distance": 0.33473891019821167,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03252247488101534,
+          "dense_rank": 1,
+          "sparse_rank": 2,
+          "bm25_score": -13.750454037242509
+        },
+        {
+          "rank": 2,
+          "chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b",
+          "distance": 0.39139747619628906,
+          "source": "pdf/NexaTech_API_Integration_Guide.pdf",
+          "fused_score": 0.03252247488101534,
+          "dense_rank": 2,
+          "sparse_rank": 1,
+          "bm25_score": -16.584885119770746
+        },
+        {
+          "rank": 3,
+          "chunk_id": "021c5d85eea5655d7a24b276574608adbe29b173e514ade0b5ebc2cefc74ad8a",
+          "distance": 0.4177069067955017,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.030798389007344232,
+          "dense_rank": 3,
+          "sparse_rank": 7,
+          "bm25_score": -3.967305951037789
+        },
+        {
+          "rank": 4,
+          "chunk_id": "2eeca668d77834fbc2776fc4fb79879acdb4f75e57912f671190003f5e243463",
+          "distance": 0.4886559247970581,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.030776515151515152,
+          "dense_rank": 4,
+          "sparse_rank": 6,
+          "bm25_score": -4.0319469587548555
+        },
+        {
+          "rank": 5,
+          "chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508",
+          "distance": 0.5308917164802551,
+          "source": "docx/NexaTech_Product_FAQ.docx",
+          "fused_score": 0.029083245521601686,
+          "dense_rank": 13,
+          "sparse_rank": 5,
+          "bm25_score": -5.197908488434958
+        },
+        {
+          "rank": 6,
+          "chunk_id": "6cb17bf20d0a7c1407095f40a6447d661aa569023c224093f268386d9383b5b6",
+          "distance": null,
+          "source": "pdf/NexaTech_Product_Atlas_Manual.pdf",
+          "fused_score": 0.015873015873015872,
+          "dense_rank": null,
+          "sparse_rank": 3,
+          "bm25_score": -11.027534285920826
+        },
+        {
+          "rank": 7,
+          "chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616",
+          "distance": null,
+          "source": "pdf/NexaTech_Cloud_Operations_Runbook.pdf",
+          "fused_score": 0.015625,
+          "dense_rank": null,
+          "sparse_rank": 4,
+          "bm25_score": -6.909552895155802
+        },
+        {
+          "rank": 8,
+          "chunk_id": "c6706d1e132a432e6a959b5001e3c0efd59aa8d0dd3d6dc430e1af31968ae100",
+          "distance": 0.4978969097137451,
+          "source": "txt/NexaTech_Training_Catalog.txt",
+          "fused_score": 0.015384615384615385,
+          "dense_rank": 5,
+          "sparse_rank": null,
+          "bm25_score": null
+        },
+        {
+          "rank": 9,
+          "chunk_id": "e784c8db124b4f57a474a8d888dda354b313f53be427372a40ce164ce9ef6605",
+          "distance": 0.5234959125518799,
+          "source": "txt/incremental_test/test_document_079.txt",
+          "fused_score": 0.015151515151515152,
+          "dense_rank": 6,
+          "sparse_rank": null,
+          "bm25_score": null
+        },
+        {
+          "rank": 10,
+          "chunk_id": "a3f2cc8a7422e77540a4a98e2e126014dfda8a16a953aed25ea427e992433030",
+          "distance": 0.5239235162734985,
+          "source": "txt/incremental_test/test_document_049.txt",
+          "fused_score": 0.014925373134328358,
+          "dense_rank": 7,
+          "sparse_rank": null,
+          "bm25_score": null
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 0.3333333333333333,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.6666666666666666,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 0.7967075809905066,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 0.7967075809905066,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 0.7967075809905066,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "security-001",
+      "query": "Which systems require multi-factor authentication?",
+      "category": "security",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 163.17913699822384,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "db04399b3712034dd7215840ff33c8dce425f7911abb1db07a07811c27490b7b",
+          "distance": 0.38002926111221313,
+          "source": "pdf/NexaTech_IT_Security_Policy.pdf",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -9.660190621876078
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5651a8cf5a50dbe6ec2098da505c3539c70bc9643dc3857c78dcbe21f7121548",
+          "distance": 0.48900192975997925,
+          "source": "docx/NexaTech_Finance_Expense_Policy.docx",
+          "fused_score": 0.03200204813108039,
+          "dense_rank": 3,
+          "sparse_rank": 2,
+          "bm25_score": -4.895005642987629
+        },
+        {
+          "rank": 3,
+          "chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b",
+          "distance": 0.4930940270423889,
+          "source": "pdf/NexaTech_API_Integration_Guide.pdf",
+          "fused_score": 0.031024531024531024,
+          "dense_rank": 6,
+          "sparse_rank": 3,
+          "bm25_score": -4.2453445987132135
+        },
+        {
+          "rank": 4,
+          "chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616",
+          "distance": 0.5367662906646729,
+          "source": "pdf/NexaTech_Cloud_Operations_Runbook.pdf",
+          "fused_score": 0.028125,
+          "dense_rank": 20,
+          "sparse_rank": 4,
+          "bm25_score": -3.0765740057255018
+        },
+        {
+          "rank": 5,
+          "chunk_id": "c6706d1e132a432e6a959b5001e3c0efd59aa8d0dd3d6dc430e1af31968ae100",
+          "distance": 0.4669491648674011,
+          "source": "txt/NexaTech_Training_Catalog.txt",
+          "fused_score": 0.016129032258064516,
+          "dense_rank": 2,
+          "sparse_rank": null,
+          "bm25_score": null
+        },
+        {
+          "rank": 6,
+          "chunk_id": "d18d91c73e19cdaa3025de6c01d8f60a0bd35c06635351e44996073c86e309c8",
+          "distance": 0.4890390634536743,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.015625,
+          "dense_rank": 4,
+          "sparse_rank": null,
+          "bm25_score": null
+        },
+        {
+          "rank": 7,
+          "chunk_id": "3a9418cab720c6a8a887630e01af98f9557d58ee97778aa5cf10a238337e1e91",
+          "distance": 0.49185889959335327,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.015384615384615385,
+          "dense_rank": 5,
+          "sparse_rank": null,
+          "bm25_score": null
+        },
+        {
+          "rank": 8,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.5001915693283081,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.014925373134328358,
+          "dense_rank": 7,
+          "sparse_rank": null,
+          "bm25_score": null
+        },
+        {
+          "rank": 9,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.5018830299377441,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.014705882352941176,
+          "dense_rank": 8,
+          "sparse_rank": null,
+          "bm25_score": null
+        },
+        {
+          "rank": 10,
+          "chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508",
+          "distance": 0.5021514296531677,
+          "source": "docx/NexaTech_Product_FAQ.docx",
+          "fused_score": 0.014492753623188406,
+          "dense_rank": 9,
+          "sparse_rank": null,
+          "bm25_score": null
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "security-002",
+      "query": "How quickly must suspected phishing or credential exposure be reported?",
+      "category": "security",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 175.44383600034053,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "db04399b3712034dd7215840ff33c8dce425f7911abb1db07a07811c27490b7b",
+          "distance": 0.3878335952758789,
+          "source": "pdf/NexaTech_IT_Security_Policy.pdf",
+          "fused_score": 0.03252247488101534,
+          "dense_rank": 2,
+          "sparse_rank": 1,
+          "bm25_score": -20.114158335004646
+        },
+        {
+          "rank": 2,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.4359525442123413,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.03200204813108039,
+          "dense_rank": 3,
+          "sparse_rank": 2,
+          "bm25_score": -6.889582503863472
+        },
+        {
+          "rank": 3,
+          "chunk_id": "c6706d1e132a432e6a959b5001e3c0efd59aa8d0dd3d6dc430e1af31968ae100",
+          "distance": 0.36853885650634766,
+          "source": "txt/NexaTech_Training_Catalog.txt",
+          "fused_score": 0.031544957774465976,
+          "dense_rank": 1,
+          "sparse_rank": 6,
+          "bm25_score": -4.057118211823779
+        },
+        {
+          "rank": 4,
+          "chunk_id": "021c5d85eea5655d7a24b276574608adbe29b173e514ade0b5ebc2cefc74ad8a",
+          "distance": 0.4485970139503479,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03076923076923077,
+          "dense_rank": 5,
+          "sparse_rank": 5,
+          "bm25_score": -4.562383358753449
+        },
+        {
+          "rank": 5,
+          "chunk_id": "0ff69ca2b055e17ea2d753ccb86d8ad096b5a08bde92df3027bce4b9f97e577d",
+          "distance": 0.4891253113746643,
+          "source": "docx/NexaTech_Employee_Handbook.docx",
+          "fused_score": 0.030117753623188408,
+          "dense_rank": 9,
+          "sparse_rank": 4,
+          "bm25_score": -4.934498316149855
+        },
+        {
+          "rank": 6,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.47535383701324463,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.03007688828584351,
+          "dense_rank": 6,
+          "sparse_rank": 7,
+          "bm25_score": -3.5453588018919984
+        },
+        {
+          "rank": 7,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.47606897354125977,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.029631255487269532,
+          "dense_rank": 7,
+          "sparse_rank": 8,
+          "bm25_score": -3.287362867038736
+        },
+        {
+          "rank": 8,
+          "chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b",
+          "distance": 0.528971791267395,
+          "source": "pdf/NexaTech_API_Integration_Guide.pdf",
+          "fused_score": 0.02782608695652174,
+          "dense_rank": 15,
+          "sparse_rank": 9,
+          "bm25_score": -2.3811270596526772
+        },
+        {
+          "rank": 9,
+          "chunk_id": "20d78f7bb1069954b074c09cf018d5983d7deb0001e452b03f9461e6db647431",
+          "distance": 0.5301235914230347,
+          "source": "txt/incremental_test/test_document_070.txt",
+          "fused_score": 0.025,
+          "dense_rank": 20,
+          "sparse_rank": 20,
+          "bm25_score": -1.986218201033096e-06
+        },
+        {
+          "rank": 10,
+          "chunk_id": "57be25d74024ce9a1ef47bada6e17e7b49f57cd14e65465a07fc6e5290c5a429",
+          "distance": null,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.015873015873015872,
+          "dense_rank": null,
+          "sparse_rank": 3,
+          "bm25_score": -5.0817821994856125
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "operations-001",
+      "query": "How frequently is the production database backed up?",
+      "category": "operations",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 169.45244100134005,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616",
+          "distance": 0.4155821204185486,
+          "source": "pdf/NexaTech_Cloud_Operations_Runbook.pdf",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -14.533259748161147
+        },
+        {
+          "rank": 2,
+          "chunk_id": "010a566c348e3d877e401adb609706f37a2973e7297b84419d9a772d2dd04591",
+          "distance": 0.42501991987228394,
+          "source": "txt/update_recovery_test.txt",
+          "fused_score": 0.03225806451612903,
+          "dense_rank": 2,
+          "sparse_rank": 2,
+          "bm25_score": -7.781109557387136
+        },
+        {
+          "rank": 3,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.44303154945373535,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.031746031746031744,
+          "dense_rank": 3,
+          "sparse_rank": 3,
+          "bm25_score": -5.41133062472059
+        },
+        {
+          "rank": 4,
+          "chunk_id": "3a03fd81589880c046a11a1abf46bec9fadfbfc6b475b08411d2e117866242ce",
+          "distance": 0.46628886461257935,
+          "source": "pdf/NexaTech_Q3_Project_Report.pdf",
+          "fused_score": 0.030309988518943745,
+          "dense_rank": 5,
+          "sparse_rank": 7,
+          "bm25_score": -2.8636291229464215
+        },
+        {
+          "rank": 5,
+          "chunk_id": "6cb17bf20d0a7c1407095f40a6447d661aa569023c224093f268386d9383b5b6",
+          "distance": 0.48659050464630127,
+          "source": "pdf/NexaTech_Product_Atlas_Manual.pdf",
+          "fused_score": 0.028370221327967807,
+          "dense_rank": 10,
+          "sparse_rank": 11,
+          "bm25_score": -1.9306456059115158
+        },
+        {
+          "rank": 6,
+          "chunk_id": "5651a8cf5a50dbe6ec2098da505c3539c70bc9643dc3857c78dcbe21f7121548",
+          "distance": 0.5126558542251587,
+          "source": "docx/NexaTech_Finance_Expense_Policy.docx",
+          "fused_score": 0.028283227848101264,
+          "dense_rank": 19,
+          "sparse_rank": 4,
+          "bm25_score": -5.319679345516165
+        },
+        {
+          "rank": 7,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.5133984088897705,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.027651515151515153,
+          "dense_rank": 20,
+          "sparse_rank": 6,
+          "bm25_score": -3.4745768935798607
+        },
+        {
+          "rank": 8,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.49224144220352173,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.02758751902587519,
+          "dense_rank": 13,
+          "sparse_rank": 12,
+          "bm25_score": -1.7852539094259787
+        },
+        {
+          "rank": 9,
+          "chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508",
+          "distance": 0.5124402046203613,
+          "source": "docx/NexaTech_Product_FAQ.docx",
+          "fused_score": 0.027106227106227107,
+          "dense_rank": 18,
+          "sparse_rank": 10,
+          "bm25_score": -2.332993894924959
+        },
+        {
+          "rank": 10,
+          "chunk_id": "1c44b2447282497014b598a48e5893b62eee9cf91d7d7287fc5fbf3194f6d9db",
+          "distance": 0.45415616035461426,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.015625,
+          "dense_rank": 4,
+          "sparse_rank": null,
+          "bm25_score": null
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "operations-002",
+      "query": "What are the recovery time objective and recovery point objective?",
+      "category": "operations",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 159.49384899795405,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616",
+          "distance": 0.45359742641448975,
+          "source": "pdf/NexaTech_Cloud_Operations_Runbook.pdf",
+          "fused_score": 0.03252247488101534,
+          "dense_rank": 2,
+          "sparse_rank": 1,
+          "bm25_score": -18.940560371026876
+        },
+        {
+          "rank": 2,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.43478649854660034,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.032266458495966696,
+          "dense_rank": 1,
+          "sparse_rank": 3,
+          "bm25_score": -4.126299375545049
+        },
+        {
+          "rank": 3,
+          "chunk_id": "010a566c348e3d877e401adb609706f37a2973e7297b84419d9a772d2dd04591",
+          "distance": 0.4580080509185791,
+          "source": "txt/update_recovery_test.txt",
+          "fused_score": 0.03200204813108039,
+          "dense_rank": 3,
+          "sparse_rank": 2,
+          "bm25_score": -5.107633642531695
+        },
+        {
+          "rank": 4,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.490325391292572,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.03125,
+          "dense_rank": 4,
+          "sparse_rank": 4,
+          "bm25_score": -3.7905183572331222
+        },
+        {
+          "rank": 5,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.4912799596786499,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.030309988518943745,
+          "dense_rank": 5,
+          "sparse_rank": 7,
+          "bm25_score": -2.5211265226328834
+        },
+        {
+          "rank": 6,
+          "chunk_id": "3a03fd81589880c046a11a1abf46bec9fadfbfc6b475b08411d2e117866242ce",
+          "distance": 0.5194383859634399,
+          "source": "pdf/NexaTech_Q3_Project_Report.pdf",
+          "fused_score": 0.029857397504456328,
+          "dense_rank": 8,
+          "sparse_rank": 6,
+          "bm25_score": -2.8636302943730847
+        },
+        {
+          "rank": 7,
+          "chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b",
+          "distance": null,
+          "source": "pdf/NexaTech_API_Integration_Guide.pdf",
+          "fused_score": 0.015384615384615385,
+          "dense_rank": null,
+          "sparse_rank": 5,
+          "bm25_score": -2.8719439880538222
+        },
+        {
+          "rank": 8,
+          "chunk_id": "c6706d1e132a432e6a959b5001e3c0efd59aa8d0dd3d6dc430e1af31968ae100",
+          "distance": 0.5008231401443481,
+          "source": "txt/NexaTech_Training_Catalog.txt",
+          "fused_score": 0.015151515151515152,
+          "dense_rank": 6,
+          "sparse_rank": null,
+          "bm25_score": null
+        },
+        {
+          "rank": 9,
+          "chunk_id": "1c44b2447282497014b598a48e5893b62eee9cf91d7d7287fc5fbf3194f6d9db",
+          "distance": 0.5080180168151855,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.014925373134328358,
+          "dense_rank": 7,
+          "sparse_rank": null,
+          "bm25_score": null
+        },
+        {
+          "rank": 10,
+          "chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508",
+          "distance": null,
+          "source": "docx/NexaTech_Product_FAQ.docx",
+          "fused_score": 0.014705882352941176,
+          "dense_rank": null,
+          "sparse_rank": 8,
+          "bm25_score": -2.442731960808989
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "product-001",
+      "query": "Which workspace roles are available in Atlas and what can administrators do?",
+      "category": "product",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 169.4162290004897,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508",
+          "distance": 0.32707691192626953,
+          "source": "docx/NexaTech_Product_FAQ.docx",
+          "fused_score": 0.03252247488101534,
+          "dense_rank": 2,
+          "sparse_rank": 1,
+          "bm25_score": -19.012999240831835
+        },
+        {
+          "rank": 2,
+          "chunk_id": "751adeb697e448ae1573901158754b9ea5e28fd0d9eaf1e350d1c8a566d5d21f",
+          "distance": 0.32581382989883423,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03252247488101534,
+          "dense_rank": 1,
+          "sparse_rank": 2,
+          "bm25_score": -8.828576722315036
+        },
+        {
+          "rank": 3,
+          "chunk_id": "6cb17bf20d0a7c1407095f40a6447d661aa569023c224093f268386d9383b5b6",
+          "distance": 0.38693737983703613,
+          "source": "pdf/NexaTech_Product_Atlas_Manual.pdf",
+          "fused_score": 0.03149801587301587,
+          "dense_rank": 3,
+          "sparse_rank": 4,
+          "bm25_score": -7.718667228378518
+        },
+        {
+          "rank": 4,
+          "chunk_id": "d31bf346d5a21a716d5d4430f86cf076323b4c0501c14897db8191d15e5a43ef",
+          "distance": 0.3999580144882202,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03149801587301587,
+          "dense_rank": 4,
+          "sparse_rank": 3,
+          "bm25_score": -7.90193665440452
+        },
+        {
+          "rank": 5,
+          "chunk_id": "57be25d74024ce9a1ef47bada6e17e7b49f57cd14e65465a07fc6e5290c5a429",
+          "distance": 0.46380680799484253,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.029236022193768675,
+          "dense_rank": 11,
+          "sparse_rank": 6,
+          "bm25_score": -3.8056119653541396
+        },
+        {
+          "rank": 6,
+          "chunk_id": "fee06a02ce34e10e9db9e6606778c0d0014a65c236af3c60117575f79d8a9f68",
+          "distance": 0.5263367891311646,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.027884615384615386,
+          "dense_rank": 20,
+          "sparse_rank": 5,
+          "bm25_score": -3.836871272376555
+        },
+        {
+          "rank": 7,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.5254175662994385,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.027583600982429624,
+          "dense_rank": 19,
+          "sparse_rank": 7,
+          "bm25_score": -3.790517521142842
+        },
+        {
+          "rank": 8,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.5142443776130676,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.027526395173453996,
+          "dense_rank": 18,
+          "sparse_rank": 8,
+          "bm25_score": -3.0614749114821804
+        },
+        {
+          "rank": 9,
+          "chunk_id": "0ff69ca2b055e17ea2d753ccb86d8ad096b5a08bde92df3027bce4b9f97e577d",
+          "distance": 0.4646425247192383,
+          "source": "docx/NexaTech_Employee_Handbook.docx",
+          "fused_score": 0.027402402402402402,
+          "dense_rank": 12,
+          "sparse_rank": 14,
+          "bm25_score": -1.7455099635229516
+        },
+        {
+          "rank": 10,
+          "chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616",
+          "distance": 0.4862576723098755,
+          "source": "pdf/NexaTech_Cloud_Operations_Runbook.pdf",
+          "fused_score": 0.027402402402402402,
+          "dense_rank": 14,
+          "sparse_rank": 12,
+          "bm25_score": -2.081278693180986
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.6666666666666666,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "product-002",
+      "query": "What should I check if Atlas search returns no results?",
+      "category": "product",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 194.18483700064826,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "6cb17bf20d0a7c1407095f40a6447d661aa569023c224093f268386d9383b5b6",
+          "distance": 0.45278358459472656,
+          "source": "pdf/NexaTech_Product_Atlas_Manual.pdf",
+          "fused_score": 0.032266458495966696,
+          "dense_rank": 3,
+          "sparse_rank": 1,
+          "bm25_score": -18.712643454385393
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d31bf346d5a21a716d5d4430f86cf076323b4c0501c14897db8191d15e5a43ef",
+          "distance": 0.3744678497314453,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.032018442622950824,
+          "dense_rank": 1,
+          "sparse_rank": 4,
+          "bm25_score": -9.284266377320865
+        },
+        {
+          "rank": 3,
+          "chunk_id": "57be25d74024ce9a1ef47bada6e17e7b49f57cd14e65465a07fc6e5290c5a429",
+          "distance": 0.4256848096847534,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.03200204813108039,
+          "dense_rank": 2,
+          "sparse_rank": 3,
+          "bm25_score": -12.743982710964048
+        },
+        {
+          "rank": 4,
+          "chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508",
+          "distance": 0.4783225655555725,
+          "source": "docx/NexaTech_Product_FAQ.docx",
+          "fused_score": 0.031754032258064516,
+          "dense_rank": 4,
+          "sparse_rank": 2,
+          "bm25_score": -13.36804835436088
+        },
+        {
+          "rank": 5,
+          "chunk_id": "fee06a02ce34e10e9db9e6606778c0d0014a65c236af3c60117575f79d8a9f68",
+          "distance": 0.4843140244483948,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.030090497737556562,
+          "dense_rank": 5,
+          "sparse_rank": 8,
+          "bm25_score": -3.836869969286222
+        },
+        {
+          "rank": 6,
+          "chunk_id": "010a566c348e3d877e401adb609706f37a2973e7297b84419d9a772d2dd04591",
+          "distance": 0.48944413661956787,
+          "source": "txt/update_recovery_test.txt",
+          "fused_score": 0.03007688828584351,
+          "dense_rank": 6,
+          "sparse_rank": 7,
+          "bm25_score": -4.137860458009961
+        },
+        {
+          "rank": 7,
+          "chunk_id": "751adeb697e448ae1573901158754b9ea5e28fd0d9eaf1e350d1c8a566d5d21f",
+          "distance": 0.4965115785598755,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.02782608695652174,
+          "dense_rank": 15,
+          "sparse_rank": 9,
+          "bm25_score": -3.774856604476993
+        },
+        {
+          "rank": 8,
+          "chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b",
+          "distance": null,
+          "source": "pdf/NexaTech_API_Integration_Guide.pdf",
+          "fused_score": 0.015384615384615385,
+          "dense_rank": null,
+          "sparse_rank": 5,
+          "bm25_score": -6.210301337988646
+        },
+        {
+          "rank": 9,
+          "chunk_id": "3a03fd81589880c046a11a1abf46bec9fadfbfc6b475b08411d2e117866242ce",
+          "distance": null,
+          "source": "pdf/NexaTech_Q3_Project_Report.pdf",
+          "fused_score": 0.015151515151515152,
+          "dense_rank": null,
+          "sparse_rank": 6,
+          "bm25_score": -5.007020692151571
+        },
+        {
+          "rank": 10,
+          "chunk_id": "e93c96940274733aedcc6b7bf62fc9047e94b36a374d1891140956ca35998159",
+          "distance": 0.49221527576446533,
+          "source": "txt/incremental_test/test_document_034.txt",
+          "fused_score": 0.014925373134328358,
+          "dense_rank": 7,
+          "sparse_rank": null,
+          "bm25_score": null
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 0.8262346571285599,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 0.944847956559586,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 0.944847956559586,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "project-001",
+      "query": "How much did average report generation time improve after the Q3 migration?",
+      "category": "project_report",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 169.7346809996816,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "3a03fd81589880c046a11a1abf46bec9fadfbfc6b475b08411d2e117866242ce",
+          "distance": 0.3915877938270569,
+          "source": "pdf/NexaTech_Q3_Project_Report.pdf",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -24.33151003388997
+        },
+        {
+          "rank": 2,
+          "chunk_id": "010a566c348e3d877e401adb609706f37a2973e7297b84419d9a772d2dd04591",
+          "distance": 0.5207127332687378,
+          "source": "txt/update_recovery_test.txt",
+          "fused_score": 0.030776515151515152,
+          "dense_rank": 6,
+          "sparse_rank": 4,
+          "bm25_score": -4.137862071521889
+        },
+        {
+          "rank": 3,
+          "chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616",
+          "distance": 0.5114522576332092,
+          "source": "pdf/NexaTech_Cloud_Operations_Runbook.pdf",
+          "fused_score": 0.03055037313432836,
+          "dense_rank": 4,
+          "sparse_rank": 7,
+          "bm25_score": -2.8071316883055917
+        },
+        {
+          "rank": 4,
+          "chunk_id": "57be25d74024ce9a1ef47bada6e17e7b49f57cd14e65465a07fc6e5290c5a429",
+          "distance": 0.554358720779419,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.02976190476190476,
+          "dense_rank": 12,
+          "sparse_rank": 3,
+          "bm25_score": -5.0817821994856125
+        },
+        {
+          "rank": 5,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.5616642832756042,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.02946236559139785,
+          "dense_rank": 15,
+          "sparse_rank": 2,
+          "bm25_score": -6.286818637171949
+        },
+        {
+          "rank": 6,
+          "chunk_id": "14d1edaa8ec8b7a96a858dc84c8d84ccf89766ff1c2d4e8142a0b6f5fa7f3b16",
+          "distance": 0.5544065237045288,
+          "source": "txt/NexaTech_Sales_Onboarding.txt",
+          "fused_score": 0.029083245521601686,
+          "dense_rank": 13,
+          "sparse_rank": 5,
+          "bm25_score": -3.294640352200692
+        },
+        {
+          "rank": 7,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.548090398311615,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.028985507246376812,
+          "dense_rank": 9,
+          "sparse_rank": 9,
+          "bm25_score": -2.521125087194265
+        },
+        {
+          "rank": 8,
+          "chunk_id": "0ff69ca2b055e17ea2d753ccb86d8ad096b5a08bde92df3027bce4b9f97e577d",
+          "distance": 0.5659468770027161,
+          "source": "docx/NexaTech_Employee_Handbook.docx",
+          "fused_score": 0.027526395173453996,
+          "dense_rank": 18,
+          "sparse_rank": 8,
+          "bm25_score": -2.5802372887912854
+        },
+        {
+          "rank": 9,
+          "chunk_id": "1c44b2447282497014b598a48e5893b62eee9cf91d7d7287fc5fbf3194f6d9db",
+          "distance": 0.46273207664489746,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.016129032258064516,
+          "dense_rank": 2,
+          "sparse_rank": null,
+          "bm25_score": null
+        },
+        {
+          "rank": 10,
+          "chunk_id": "c6706d1e132a432e6a959b5001e3c0efd59aa8d0dd3d6dc430e1af31968ae100",
+          "distance": 0.4981640577316284,
+          "source": "txt/NexaTech_Training_Catalog.txt",
+          "fused_score": 0.015873015873015872,
+          "dense_rank": 3,
+          "sparse_rank": null,
+          "bm25_score": null
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "sales-001",
+      "query": "What information should Sales provide to Support and Implementation after a signed agreement?",
+      "category": "sales",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 215.03475399731542,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "14d1edaa8ec8b7a96a858dc84c8d84ccf89766ff1c2d4e8142a0b6f5fa7f3b16",
+          "distance": 0.32535725831985474,
+          "source": "txt/NexaTech_Sales_Onboarding.txt",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -31.915963475145475
+        },
+        {
+          "rank": 2,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.4225093722343445,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.03225806451612903,
+          "dense_rank": 2,
+          "sparse_rank": 2,
+          "bm25_score": -8.39039127017439
+        },
+        {
+          "rank": 3,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.42543041706085205,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.031746031746031744,
+          "dense_rank": 3,
+          "sparse_rank": 3,
+          "bm25_score": -6.54716072890356
+        },
+        {
+          "rank": 4,
+          "chunk_id": "5651a8cf5a50dbe6ec2098da505c3539c70bc9643dc3857c78dcbe21f7121548",
+          "distance": 0.46139031648635864,
+          "source": "docx/NexaTech_Finance_Expense_Policy.docx",
+          "fused_score": 0.031009615384615385,
+          "dense_rank": 4,
+          "sparse_rank": 5,
+          "bm25_score": -5.670471193796203
+        },
+        {
+          "rank": 5,
+          "chunk_id": "d18d91c73e19cdaa3025de6c01d8f60a0bd35c06635351e44996073c86e309c8",
+          "distance": 0.4680693745613098,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.031009615384615385,
+          "dense_rank": 5,
+          "sparse_rank": 4,
+          "bm25_score": -5.683761124051874
+        },
+        {
+          "rank": 6,
+          "chunk_id": "0ff69ca2b055e17ea2d753ccb86d8ad096b5a08bde92df3027bce4b9f97e577d",
+          "distance": 0.47497791051864624,
+          "source": "docx/NexaTech_Employee_Handbook.docx",
+          "fused_score": 0.03007688828584351,
+          "dense_rank": 7,
+          "sparse_rank": 6,
+          "bm25_score": -5.160764650964999
+        },
+        {
+          "rank": 7,
+          "chunk_id": "3a03fd81589880c046a11a1abf46bec9fadfbfc6b475b08411d2e117866242ce",
+          "distance": 0.4857550859451294,
+          "source": "pdf/NexaTech_Q3_Project_Report.pdf",
+          "fused_score": 0.028577260665441927,
+          "dense_rank": 9,
+          "sparse_rank": 11,
+          "bm25_score": -2.3503383002076346
+        },
+        {
+          "rank": 8,
+          "chunk_id": "c6706d1e132a432e6a959b5001e3c0efd59aa8d0dd3d6dc430e1af31968ae100",
+          "distance": 0.492587149143219,
+          "source": "txt/NexaTech_Training_Catalog.txt",
+          "fused_score": 0.02857142857142857,
+          "dense_rank": 10,
+          "sparse_rank": 10,
+          "bm25_score": -3.218967973660304
+        },
+        {
+          "rank": 9,
+          "chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b",
+          "distance": 0.5181050896644592,
+          "source": "pdf/NexaTech_API_Integration_Guide.pdf",
+          "fused_score": 0.02786377708978328,
+          "dense_rank": 16,
+          "sparse_rank": 8,
+          "bm25_score": -3.829179644175764
+        },
+        {
+          "rank": 10,
+          "chunk_id": "010a566c348e3d877e401adb609706f37a2973e7297b84419d9a772d2dd04591",
+          "distance": 0.5174508094787598,
+          "source": "txt/update_recovery_test.txt",
+          "fused_score": 0.02782608695652174,
+          "dense_rank": 15,
+          "sparse_rank": 9,
+          "bm25_score": -3.502635014322423
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "training-001",
+      "query": "How long is Python for Data Work training and what is its prerequisite?",
+      "category": "training",
+      "answerable": true,
+      "status": "success",
+      "latency_ms": 230.5095199990319,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "c6706d1e132a432e6a959b5001e3c0efd59aa8d0dd3d6dc430e1af31968ae100",
+          "distance": 0.23994386196136475,
+          "source": "txt/NexaTech_Training_Catalog.txt",
+          "fused_score": 0.03278688524590164,
+          "dense_rank": 1,
+          "sparse_rank": 1,
+          "bm25_score": -23.0840453863723
+        },
+        {
+          "rank": 2,
+          "chunk_id": "0ff69ca2b055e17ea2d753ccb86d8ad096b5a08bde92df3027bce4b9f97e577d",
+          "distance": 0.4557458758354187,
+          "source": "docx/NexaTech_Employee_Handbook.docx",
+          "fused_score": 0.03125763125763126,
+          "dense_rank": 3,
+          "sparse_rank": 5,
+          "bm25_score": -10.374278984393603
+        },
+        {
+          "rank": 3,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.4866875410079956,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.031054405392392875,
+          "dense_rank": 7,
+          "sparse_rank": 2,
+          "bm25_score": -15.661233336813323
+        },
+        {
+          "rank": 4,
+          "chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508",
+          "distance": 0.47769880294799805,
+          "source": "docx/NexaTech_Product_FAQ.docx",
+          "fused_score": 0.030309988518943745,
+          "dense_rank": 5,
+          "sparse_rank": 7,
+          "bm25_score": -7.294344804930204
+        },
+        {
+          "rank": 5,
+          "chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616",
+          "distance": 0.47824448347091675,
+          "source": "pdf/NexaTech_Cloud_Operations_Runbook.pdf",
+          "fused_score": 0.030303030303030304,
+          "dense_rank": 6,
+          "sparse_rank": 6,
+          "bm25_score": -7.609041198859924
+        },
+        {
+          "rank": 6,
+          "chunk_id": "db04399b3712034dd7215840ff33c8dce425f7911abb1db07a07811c27490b7b",
+          "distance": 0.49233031272888184,
+          "source": "pdf/NexaTech_IT_Security_Policy.pdf",
+          "fused_score": 0.030117753623188408,
+          "dense_rank": 9,
+          "sparse_rank": 4,
+          "bm25_score": -10.400020117862738
+        },
+        {
+          "rank": 7,
+          "chunk_id": "6cb17bf20d0a7c1407095f40a6447d661aa569023c224093f268386d9383b5b6",
+          "distance": 0.4594491124153137,
+          "source": "pdf/NexaTech_Product_Atlas_Manual.pdf",
+          "fused_score": 0.029910714285714284,
+          "dense_rank": 4,
+          "sparse_rank": 10,
+          "bm25_score": -6.164926611604249
+        },
+        {
+          "rank": 8,
+          "chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b",
+          "distance": 0.4487232565879822,
+          "source": "pdf/NexaTech_API_Integration_Guide.pdf",
+          "fused_score": 0.02964254577157803,
+          "dense_rank": 2,
+          "sparse_rank": 14,
+          "bm25_score": -4.0224606753043695
+        },
+        {
+          "rank": 9,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.514201283454895,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.029571646010002173,
+          "dense_rank": 13,
+          "sparse_rank": 3,
+          "bm25_score": -10.713022696844085
+        },
+        {
+          "rank": 10,
+          "chunk_id": "3a03fd81589880c046a11a1abf46bec9fadfbfc6b475b08411d2e117866242ce",
+          "distance": 0.4951339364051819,
+          "source": "pdf/NexaTech_Q3_Project_Report.pdf",
+          "fused_score": 0.028991596638655463,
+          "dense_rank": 10,
+          "sparse_rank": 8,
+          "bm25_score": -6.903545400109311
+        }
+      ],
+      "metrics": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "3": {
+          "precision": 0.3333333333333333,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        },
+        "10": {
+          "precision": 0.1,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "out-of-scope-001",
+      "query": "What is the current weather forecast in Nairobi?",
+      "category": "out_of_scope",
+      "answerable": false,
+      "status": "success",
+      "latency_ms": 138.60420100172632,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "6cd5989c6acfa8bdd72d9ff8bd2a12fc1a01176dc444d1905ddd4c5357f64199",
+          "distance": 0.41776031255722046,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.03252247488101534,
+          "dense_rank": 2,
+          "sparse_rank": 1,
+          "bm25_score": -5.139154246087326
+        },
+        {
+          "rank": 2,
+          "chunk_id": "78d482b07232859d156c1cf1dcbb910e0b567ca8c8196dcad864ee277afb7255",
+          "distance": 0.3838080167770386,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.03252247488101534,
+          "dense_rank": 1,
+          "sparse_rank": 2,
+          "bm25_score": -5.139154246087326
+        },
+        {
+          "rank": 3,
+          "chunk_id": "6574131a9d5fa5a4fce8056ae33e3c778b01453e5b389bcf7c025fc77a577204",
+          "distance": 0.43709588050842285,
+          "source": "csv/NexaTech_Inventory.csv",
+          "fused_score": 0.031746031746031744,
+          "dense_rank": 3,
+          "sparse_rank": 3,
+          "bm25_score": -5.139152813562612
+        },
+        {
+          "rank": 4,
+          "chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616",
+          "distance": 0.5436286926269531,
+          "source": "pdf/NexaTech_Cloud_Operations_Runbook.pdf",
+          "fused_score": 0.03125,
+          "dense_rank": 4,
+          "sparse_rank": 4,
+          "bm25_score": -4.102421524958013
+        },
+        {
+          "rank": 5,
+          "chunk_id": "07041a1bcce239753acf2f67ab875d092aee6e9041660f32614a74ab0dbe06f0",
+          "distance": 0.5664757490158081,
+          "source": "pdf/NexaTech_Incident_Response_Plan.pdf",
+          "fused_score": 0.02964426877470356,
+          "dense_rank": 9,
+          "sparse_rank": 6,
+          "bm25_score": -3.4745768935798607
+        },
+        {
+          "rank": 6,
+          "chunk_id": "010a566c348e3d877e401adb609706f37a2973e7297b84419d9a772d2dd04591",
+          "distance": 0.5693554878234863,
+          "source": "txt/update_recovery_test.txt",
+          "fused_score": 0.028790389395194696,
+          "dense_rank": 11,
+          "sparse_rank": 8,
+          "bm25_score": -2.6734789521053526
+        },
+        {
+          "rank": 7,
+          "chunk_id": "5651a8cf5a50dbe6ec2098da505c3539c70bc9643dc3857c78dcbe21f7121548",
+          "distance": 0.5665878653526306,
+          "source": "docx/NexaTech_Finance_Expense_Policy.docx",
+          "fused_score": 0.02857142857142857,
+          "dense_rank": 10,
+          "sparse_rank": 10,
+          "bm25_score": -2.205328275838386
+        },
+        {
+          "rank": 8,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.5663926005363464,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.028404512489927477,
+          "dense_rank": 8,
+          "sparse_rank": 13,
+          "bm25_score": -1.7852539094259787
+        },
+        {
+          "rank": 9,
+          "chunk_id": "3a03fd81589880c046a11a1abf46bec9fadfbfc6b475b08411d2e117866242ce",
+          "distance": 0.5607854127883911,
+          "source": "pdf/NexaTech_Q3_Project_Report.pdf",
+          "fused_score": 0.028258706467661692,
+          "dense_rank": 7,
+          "sparse_rank": 15,
+          "bm25_score": -2.700238597803285e-06
+        },
+        {
+          "rank": 10,
+          "chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508",
+          "distance": 0.5901526212692261,
+          "source": "docx/NexaTech_Product_FAQ.docx",
+          "fused_score": 0.027650648360030512,
+          "dense_rank": 16,
+          "sparse_rank": 9,
+          "bm25_score": -2.332993894924959
+        }
+      ],
+      "unanswerable_evaluation": {
+        "returned_results": true,
+        "empty_result": false
+      }
+    },
+    {
+      "id": "out-of-scope-002",
+      "query": "What is the company's monthly payroll amount?",
+      "category": "out_of_scope",
+      "answerable": false,
+      "status": "success",
+      "latency_ms": 159.9006600008579,
+      "retrieved_count": 10,
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "0ff69ca2b055e17ea2d753ccb86d8ad096b5a08bde92df3027bce4b9f97e577d",
+          "distance": 0.42679882049560547,
+          "source": "docx/NexaTech_Employee_Handbook.docx",
+          "fused_score": 0.032266458495966696,
+          "dense_rank": 1,
+          "sparse_rank": 3,
+          "bm25_score": -4.8482911769702834
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5651a8cf5a50dbe6ec2098da505c3539c70bc9643dc3857c78dcbe21f7121548",
+          "distance": 0.4407459497451782,
+          "source": "docx/NexaTech_Finance_Expense_Policy.docx",
+          "fused_score": 0.030834914611005692,
+          "dense_rank": 2,
+          "sparse_rank": 8,
+          "bm25_score": -2.205328275838386
+        },
+        {
+          "rank": 3,
+          "chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616",
+          "distance": 0.48830461502075195,
+          "source": "pdf/NexaTech_Cloud_Operations_Runbook.pdf",
+          "fused_score": 0.030776515151515152,
+          "dense_rank": 6,
+          "sparse_rank": 4,
+          "bm25_score": -4.102421524958013
+        },
+        {
+          "rank": 4,
+          "chunk_id": "14d1edaa8ec8b7a96a858dc84c8d84ccf89766ff1c2d4e8142a0b6f5fa7f3b16",
+          "distance": 0.4906524419784546,
+          "source": "txt/NexaTech_Sales_Onboarding.txt",
+          "fused_score": 0.030621785881252923,
+          "dense_rank": 9,
+          "sparse_rank": 2,
+          "bm25_score": -6.682463685878564
+        },
+        {
+          "rank": 5,
+          "chunk_id": "db04399b3712034dd7215840ff33c8dce425f7911abb1db07a07811c27490b7b",
+          "distance": 0.5033279657363892,
+          "source": "pdf/NexaTech_IT_Security_Policy.pdf",
+          "fused_score": 0.03009207275993712,
+          "dense_rank": 13,
+          "sparse_rank": 1,
+          "bm25_score": -8.121299204952953
+        },
+        {
+          "rank": 6,
+          "chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0",
+          "distance": 0.4883073568344116,
+          "source": "docx/NexaTech_Data_Retention_Policy.docx",
+          "fused_score": 0.029418126757516764,
+          "dense_rank": 7,
+          "sparse_rank": 9,
+          "bm25_score": -2.1239694298624148
+        },
+        {
+          "rank": 7,
+          "chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508",
+          "distance": 0.525432288646698,
+          "source": "docx/NexaTech_Product_FAQ.docx",
+          "fused_score": 0.027583600982429624,
+          "dense_rank": 19,
+          "sparse_rank": 7,
+          "bm25_score": -2.332993894924959
+        },
+        {
+          "rank": 8,
+          "chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98",
+          "distance": 0.5144995450973511,
+          "source": "docx/NexaTech_Customer_Support_Playbook.docx",
+          "fused_score": 0.027417840375586856,
+          "dense_rank": 15,
+          "sparse_rank": 11,
+          "bm25_score": -1.7852539094259787
+        },
+        {
+          "rank": 9,
+          "chunk_id": "6cb17bf20d0a7c1407095f40a6447d661aa569023c224093f268386d9383b5b6",
+          "distance": 0.5240113735198975,
+          "source": "pdf/NexaTech_Product_Atlas_Manual.pdf",
+          "fused_score": 0.027106227106227107,
+          "dense_rank": 18,
+          "sparse_rank": 10,
+          "bm25_score": -1.9306448459229042
+        },
+        {
+          "rank": 10,
+          "chunk_id": "888e793bfc4d06a0f43342a5624bae6384f9e31b745201564303741af23b9361",
+          "distance": 0.47222912311553955,
+          "source": "csv/NexaTech_Support_Tickets.csv",
+          "fused_score": 0.015873015873015872,
+          "dense_rank": 3,
+          "sparse_rank": null,
+          "bm25_score": null
+        }
+      ],
+      "unanswerable_evaluation": {
+        "returned_results": true,
+        "empty_result": false
+      }
+    }
+  ],
+  "run_metadata": {
+    "started_at_utc": "2026-11-17T15:09:45.005107+00:00",
+    "completed_at_utc": "2026-11-17T15:09:49.961086+00:00",
+    "retrieval_method": "hybrid_dense_bm25_rrf",
+    "collection": "knowledge_base",
+    "embedding_model": "nomic-embed-text",
+    "k_values": [
+      1,
+      3,
+      5,
+      10
+    ],
+    "candidate_multiplier": 2,
+    "max_candidates": 100,
+    "rrf_k": 60,
+    "sparse_index_path": "/home/samuel/Desktop/rag_project/retrieval/indexes/knowledge_base_fts.sqlite3",
+    "sparse_sync_stats": {
+      "inserted": 0,
+      "updated": 0,
+      "unchanged": 129,
+      "deleted": 0,
+      "indexed_chunks": 129
+    }
+  }
+}

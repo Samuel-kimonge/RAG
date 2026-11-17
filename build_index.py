@@ -1,559 +1,801 @@
 
 import hashlib
-import logging
-import sqlite3
+import json
+import math
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import chromadb
 import requests
 
-from ingestion.document_loader import discover_documents, load_document
-from ingestion.chunker import chunk_document
 
-
-# --------------------------------------------------
+# ============================================================
 # CONFIGURATION
-# --------------------------------------------------
+# ============================================================
 
 DATA_DIR = Path("data/raw")
 CHROMADB_DIR = Path("chromadb")
-MANIFEST_PATH = Path("data/processed/ingestion_manifest.sqlite3")
-
 COLLECTION_NAME = "knowledge_base"
+MANIFEST_PATH = Path("ingestion_manifest.json")
 
-OLLAMA_URL = "http://localhost:11434/api/embed"
+EMBED_URL = "http://localhost:11434/api/embed"
 EMBEDDING_MODEL = "nomic-embed-text"
 
 CHUNK_SIZE = 450
 CHUNK_OVERLAP = 80
-
 EMBEDDING_BATCH_SIZE = 32
-UPSERT_BATCH_SIZE = 100
-
-MAX_RETRIES = 3
-REQUEST_TIMEOUT = (5, 120)
+VALIDATION_PAGE_SIZE = 1000
 
 SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".txt", ".csv"}
 
 
-# --------------------------------------------------
-# LOGGING
-# --------------------------------------------------
+# ============================================================
+# IMPORT PROJECT MODULES
+# ============================================================
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
-
-logger = logging.getLogger(__name__)
+from ingestion.document_loader import discover_documents, load_document
+from ingestion.chunker import chunk_document
 
 
-# --------------------------------------------------
-# DATABASE INITIALIZATION
-# --------------------------------------------------
-
-def get_collection():
-    client = chromadb.PersistentClient(
-        path=str(CHROMADB_DIR)
-    )
-
-    collection = client.get_or_create_collection(
-        name=COLLECTION_NAME,
-        metadata={"hnsw:space": "cosine"},
-    )
-
-    return collection
-
-
-def get_manifest():
-    MANIFEST_PATH.parent.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
-
-    connection = sqlite3.connect(MANIFEST_PATH)
-
-    connection.execute("""
-        CREATE TABLE IF NOT EXISTS documents (
-            source TEXT PRIMARY KEY,
-            document_hash TEXT NOT NULL,
-            chunk_count INTEGER NOT NULL,
-            indexed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-    """)
-
-    connection.commit()
-    return connection
-
-
-def bootstrap_manifest(collection, connection):
-    """Import existing ChromaDB sources into the manifest once."""
-
-    existing = connection.execute(
-        "SELECT COUNT(*) FROM documents"
-    ).fetchone()[0]
-
-    if existing or collection.count() == 0:
-        return
-
-    logger.info("Initializing manifest from existing index.")
-
-    records = collection.get(include=["metadatas"])
-    grouped = {}
-
-    for metadata in records["metadatas"]:
-        source = metadata.get("source")
-        document_hash = metadata.get("document_hash")
-
-        if not isinstance(source, str):
-            continue
-
-        if not isinstance(document_hash, str):
-            continue
-
-        entry = grouped.setdefault(
-            source,
-            {"hash": document_hash, "count": 0},
-        )
-
-        if entry["hash"] == document_hash:
-            entry["count"] += 1
-        else:
-            # Mixed versions: force reprocessing on next run.
-            entry["hash"] = ""
-            entry["count"] = 0
-
-    connection.executemany(
-        """
-        INSERT OR REPLACE INTO documents
-        (source, document_hash, chunk_count)
-        VALUES (?, ?, ?)
-        """,
-        [
-            (source, item["hash"], item["count"])
-            for source, item in grouped.items()
-        ],
-    )
-
-    connection.commit()
-
-
-# --------------------------------------------------
+# ============================================================
 # DOCUMENT UTILITIES
-# --------------------------------------------------
+# ============================================================
 
 def file_hash(path):
     """Calculate a SHA-256 hash without loading the whole file."""
 
     digest = hashlib.sha256()
 
-    with path.open("rb") as file:
-        for block in iter(
-            lambda: file.read(1024 * 1024),
-            b"",
-        ):
+    with Path(path).open("rb") as file:
+        for block in iter(lambda: file.read(1024 * 1024), b""):
             digest.update(block)
 
     return digest.hexdigest()
 
 
-def create_chunk_id(source, document_hash, chunk_number):
-    """Generate a deterministic ID for every chunk."""
+def chunk_id(source, document_hash, index):
+    """Generate deterministic IDs for document chunks."""
 
-    value = f"{source}:{document_hash}:{chunk_number}"
+    value = f"{source}:{document_hash}:{index}"
 
-    return hashlib.sha256(
-        value.encode("utf-8")
-    ).hexdigest()
+    return hashlib.sha256(value.encode()).hexdigest()
 
 
-def clean_metadata(metadata):
-    """Keep only metadata types supported by ChromaDB."""
+# ============================================================
+# CHROMADB
+# ============================================================
 
-    return {
-        key: value
-        for key, value in metadata.items()
-        if isinstance(value, (str, int, float, bool))
-    }
+def get_collection():
+    client = chromadb.PersistentClient(
+        path=str(CHROMADB_DIR)
+    )
 
-
-# --------------------------------------------------
-# OLLAMA EMBEDDINGS
-# --------------------------------------------------
-
-def get_embeddings(texts, session):
-    """Generate embeddings with retries and validation."""
-
-    for attempt in range(1, MAX_RETRIES + 1):
-        try:
-            response = session.post(
-                OLLAMA_URL,
-                json={
-                    "model": EMBEDDING_MODEL,
-                    "input": texts,
-                },
-                timeout=REQUEST_TIMEOUT,
-            )
-
-            response.raise_for_status()
-
-            embeddings = response.json()["embeddings"]
-
-            if len(embeddings) != len(texts):
-                raise ValueError(
-                    "Embedding count does not match input count."
-                )
-
-            if not embeddings or any(
-                not embedding
-                or not all(
-                    isinstance(value, (int, float))
-                    for value in embedding
-                )
-                for embedding in embeddings
-            ):
-                raise ValueError("Invalid embedding response.")
-
-            dimensions = {len(item) for item in embeddings}
-
-            if len(dimensions) != 1:
-                raise ValueError("Inconsistent embedding dimensions.")
-
-            return embeddings
-
-        except (
-            requests.RequestException,
-            ValueError,
-            KeyError,
-        ) as error:
-
-            if attempt == MAX_RETRIES:
-                raise RuntimeError(
-                    f"Embedding failed after {MAX_RETRIES} attempts: {error}"
-                ) from error
-
-            delay = 2 ** attempt
-
-            logger.warning(
-                "Embedding attempt %s failed: %s. Retrying in %ss.",
-                attempt,
-                error,
-                delay,
-            )
-
-            time.sleep(delay)
+    return client.get_or_create_collection(
+        name=COLLECTION_NAME,
+        metadata={"hnsw:space": "cosine"},
+    )
 
 
-def embed_in_batches(texts, session):
-    """Embed large documents in manageable batches."""
-
-    embeddings = []
-
-    for start in range(0, len(texts), EMBEDDING_BATCH_SIZE):
-        batch = texts[
-            start:start + EMBEDDING_BATCH_SIZE
-        ]
-
-        embeddings.extend(
-            get_embeddings(batch, session)
-        )
-
-    return embeddings
-
-
-# --------------------------------------------------
-# CHROMADB UTILITIES
-# --------------------------------------------------
-
-def get_source_records(collection, source):
+def existing_source_records(collection, source):
     return collection.get(
         where={"source": source},
         include=["metadatas"],
     )
 
 
-def upsert_in_batches(collection, records):
-    """Write vectors in batches to ChromaDB."""
+def iter_collection_metadata(collection):
+    """Read collection metadata in pages."""
 
-    for start in range(0, len(records), UPSERT_BATCH_SIZE):
-        batch = records[
-            start:start + UPSERT_BATCH_SIZE
-        ]
+    total = collection.count()
 
-        collection.upsert(
-            ids=[item["id"] for item in batch],
-            documents=[item["text"] for item in batch],
-            embeddings=[item["embedding"] for item in batch],
-            metadatas=[item["metadata"] for item in batch],
+    for offset in range(0, total, VALIDATION_PAGE_SIZE):
+
+        result = collection.get(
+            include=["metadatas"],
+            limit=VALIDATION_PAGE_SIZE,
+            offset=offset,
         )
 
+        for record_id, metadata in zip(
+            result["ids"],
+            result["metadatas"],
+        ):
+            yield record_id, metadata
 
-# --------------------------------------------------
-# DOCUMENT PROCESSING
-# --------------------------------------------------
 
-def process_document(path, collection, connection, session):
-    """Index one document without discarding its previous version prematurely."""
+# ============================================================
+# MANIFEST MANAGEMENT
+# ============================================================
 
-    source = path.relative_to(DATA_DIR).as_posix()
+def load_manifest():
 
-    current_hash = file_hash(path)
+    if not MANIFEST_PATH.exists():
+        return None
 
-    previous = connection.execute(
-        """
-        SELECT document_hash, chunk_count
-        FROM documents
-        WHERE source = ?
-        """,
-        (source,),
-    ).fetchone()
-    old_records = get_source_records(collection, source)
+    data = json.loads(
+        MANIFEST_PATH.read_text(encoding="utf-8")
+    )
 
     if (
-        previous
-        and previous[0] == current_hash
-        and previous[1] > 0
-        and len(old_records["ids"]) == previous[1]
-        and all(
-            metadata.get("document_hash") == current_hash
-            for metadata in old_records["metadatas"]
-        )
+        not isinstance(data, dict)
+        or not isinstance(data.get("documents"), dict)
     ):
-        logger.info("Unchanged: %s", source)
-        return 0, "skipped"
-
-    records = load_document(path)
-
-    # Detect files modified while they were being processed.
-    if file_hash(path) != current_hash:
-        raise RuntimeError(
-            f"Document changed during ingestion: {source}"
+        raise ValueError(
+            "Invalid ingestion manifest. "
+            "Back it up and inspect it before proceeding."
         )
 
-    prepared = []
-    chunk_number = 0
+    for source, entry in data["documents"].items():
 
-    for record_index, record in enumerate(records):
-        chunks = chunk_document(
-            record["text"],
-            metadata={
-                **record.get("metadata", {}),
-                "source": source,
-                "filename": path.name,
-                "file_type": path.suffix.lower().lstrip("."),
-                "document_hash": current_hash,
-                "record_index": record_index,
-            },
-            chunk_size=CHUNK_SIZE,
-            overlap=CHUNK_OVERLAP,
-        )
+        if (
+            not isinstance(entry, dict)
+            or not isinstance(entry.get("sha256"), str)
+            or not isinstance(entry.get("chunks"), int)
+            or entry["chunks"] < 0
+        ):
+            raise ValueError(
+                f"Invalid manifest entry: {source}"
+            )
 
-        for chunk in chunks:
-            metadata = {
-                **chunk["metadata"],
-                "chunk_index": chunk_number,
-            }
+    return data
 
-            prepared.append({
-                "id": create_chunk_id(
-                    source,
-                    current_hash,
-                    chunk_number,
-                ),
-                "text": chunk["text"],
-                "metadata": clean_metadata(metadata),
-            })
 
-            chunk_number += 1
+def save_manifest(manifest):
+    """Write the manifest atomically."""
 
-    old_ids = set(old_records["ids"])
+    temporary = MANIFEST_PATH.with_suffix(".tmp")
 
-    if prepared:
-        texts = [
-            item["text"]
-            for item in prepared
-        ]
+    temporary.write_text(
+        json.dumps(manifest, indent=2),
+        encoding="utf-8",
+    )
 
-        embeddings = embed_in_batches(
-            texts,
-            session,
-        )
+    temporary.replace(MANIFEST_PATH)
 
-        for item, embedding in zip(prepared, embeddings):
-            item["embedding"] = embedding
 
-        # Write the new version before removing the old one.
-        upsert_in_batches(
-            collection,
-            prepared,
-        )
+def bootstrap_manifest(collection, document_paths):
+    """
+    Recover manifest information from existing ChromaDB records.
+    Existing embeddings are preserved without re-embedding.
+    """
 
-    new_ids = {
-        item["id"]
-        for item in prepared
+    print("\nInitializing manifest from existing ChromaDB index...")
+
+    manifest = {
+        "version": 1,
+        "documents": {},
     }
 
-    obsolete_ids = list(old_ids - new_ids)
+    existing = {}
+
+    for _, metadata in iter_collection_metadata(collection):
+
+        if not metadata:
+            continue
+
+        source = metadata.get("source")
+        digest = metadata.get("document_hash")
+
+        if source and digest:
+
+            entry = existing.setdefault(
+                source,
+                {
+                    "hashes": set(),
+                    "count": 0,
+                },
+            )
+
+            entry["hashes"].add(digest)
+            entry["count"] += 1
+
+    for path in document_paths:
+
+        source = path.relative_to(DATA_DIR).as_posix()
+        entry = existing.get(source)
+
+        if not entry:
+            continue
+
+        digest = file_hash(path)
+
+        if entry["hashes"] == {digest}:
+
+            manifest["documents"][source] = {
+                "sha256": digest,
+                "chunks": entry["count"],
+                "indexed_at": None,
+            }
+
+            print(f"Preserved: {source}")
+
+    save_manifest(manifest)
+
+    return manifest
+
+
+# ============================================================
+# EMBEDDING
+# ============================================================
+
+def get_embeddings(texts):
+
+    response = requests.post(
+        EMBED_URL,
+        json={
+            "model": EMBEDDING_MODEL,
+            "input": texts,
+        },
+        timeout=300,
+    )
+
+    response.raise_for_status()
+
+    embeddings = response.json().get("embeddings")
+
+    if (
+        not embeddings
+        or len(embeddings) != len(texts)
+    ):
+        raise RuntimeError(
+            "Ollama returned an invalid number of embeddings."
+        )
+
+    dimensions = len(embeddings[0])
+
+    if not dimensions:
+        raise RuntimeError("Empty embedding vector.")
+
+    for vector in embeddings:
+
+        if (
+            len(vector) != dimensions
+            or not all(math.isfinite(value) for value in vector)
+        ):
+            raise RuntimeError(
+                "Invalid embedding vector returned by Ollama."
+            )
+
+    return embeddings
+
+
+def embed_in_batches(texts):
+
+    embeddings = []
+
+    for start in range(
+        0,
+        len(texts),
+        EMBEDDING_BATCH_SIZE,
+    ):
+
+        batch = texts[
+            start:start + EMBEDDING_BATCH_SIZE
+        ]
+
+        embeddings.extend(
+            get_embeddings(batch)
+        )
+
+        print(
+            f"Embedded {len(embeddings)}/{len(texts)} chunks"
+        )
+
+    return embeddings
+
+
+# ============================================================
+# DOCUMENT INDEXING
+# ============================================================
+
+def is_unchanged(collection, source, digest, manifest):
+
+    saved = manifest["documents"].get(source)
+
+    if not saved:
+        return False
+
+    if saved.get("sha256") != digest:
+        return False
+
+    existing = existing_source_records(
+        collection,
+        source,
+    )
+
+    metadatas = existing["metadatas"]
+
+    if len(metadatas) != saved.get("chunks"):
+        return False
+
+    return bool(metadatas) and all(
+        metadata
+        and metadata.get("document_hash") == digest
+        for metadata in metadatas
+    )
+
+
+def process_document(collection, path):
+
+    source = path.relative_to(DATA_DIR).as_posix()
+    digest = file_hash(path)
+
+    records = []
+
+    for document in load_document(path):
+
+        records.extend(
+            chunk_document(
+                document["text"],
+                metadata=document["metadata"],
+                chunk_size=CHUNK_SIZE,
+                overlap=CHUNK_OVERLAP,
+            )
+        )
+
+    if not records:
+        raise ValueError(
+            f"No text extracted from {path}"
+        )
+
+    texts = [
+        record["text"]
+        for record in records
+    ]
+
+    embeddings = embed_in_batches(texts)
+
+    ids = []
+    metadatas = []
+
+    for index, record in enumerate(records):
+
+        metadata = {
+            **record["metadata"],
+            "source": source,
+            "filename": path.name,
+            "file_type": path.suffix.lower().lstrip("."),
+            "document_hash": digest,
+            "chunk_index": index,
+            "chunk_number": index,
+        }
+
+        metadata = {
+            key: value
+            for key, value in metadata.items()
+            if value is not None
+            and isinstance(value, (str, int, float, bool))
+        }
+
+        ids.append(
+            chunk_id(source, digest, index)
+        )
+
+        metadatas.append(metadata)
+
+    # Keep old records until new embeddings have been generated.
+    old_ids = existing_source_records(
+        collection,
+        source,
+    )["ids"]
+
+    # Write the new document version.
+    collection.upsert(
+        ids=ids,
+        documents=texts,
+        embeddings=embeddings,
+        metadatas=metadatas,
+    )
+
+    # Remove obsolete chunks only after successful upsert.
+    new_ids = set(ids)
+
+    obsolete_ids = [
+        old_id
+        for old_id in old_ids
+        if old_id not in new_ids
+    ]
 
     if obsolete_ids:
         collection.delete(ids=obsolete_ids)
 
-    connection.execute(
-        """
-        INSERT OR REPLACE INTO documents
-        (source, document_hash, chunk_count, indexed_at)
-        VALUES (?, ?, ?, CURRENT_TIMESTAMP)
-        """,
-        (source, current_hash, len(prepared)),
+    return len(records), digest
+
+
+# ============================================================
+# DELETION SYNCHRONIZATION
+# ============================================================
+
+def synchronize_deletions(
+    collection,
+    manifest,
+    current_sources,
+):
+    """
+    Remove indexed documents that no longer exist in data/raw.
+
+    Only manifest-tracked documents are automatically deleted.
+    """
+
+    deleted_documents = 0
+    deleted_chunks = 0
+
+    print("\nChecking for deleted documents...")
+
+    tracked_sources = list(
+        manifest["documents"].keys()
     )
 
-    connection.commit()
+    for source in tracked_sources:
 
-    logger.info(
-        "Indexed: %s | %s chunks",
-        source,
-        len(prepared),
-    )
+        if source in current_sources:
+            continue
 
-    return len(prepared), "processed"
+        print(f"DELETED DOCUMENT DETECTED: {source}")
 
-
-# --------------------------------------------------
-# STALE DOCUMENT CLEANUP
-# --------------------------------------------------
-
-def remove_deleted_documents(active_sources, collection, connection):
-    """Remove indexed sources no longer present in the raw directory."""
-
-    indexed_sources = {
-        row[0]
-        for row in connection.execute(
-            "SELECT source FROM documents"
-        ).fetchall()
-    }
-
-    stale_sources = indexed_sources - active_sources
-
-    for source in stale_sources:
-        existing = get_source_records(
+        existing = existing_source_records(
             collection,
             source,
         )
 
-        if existing["ids"]:
-            collection.delete(ids=existing["ids"])
+        ids = existing["ids"]
 
-        connection.execute(
-            "DELETE FROM documents WHERE source = ?",
-            (source,),
+        if ids:
+            collection.delete(ids=ids)
+
+        deleted_chunks += len(ids)
+
+        # Remove the manifest entry after ChromaDB deletion.
+        manifest["documents"].pop(source)
+
+        save_manifest(manifest)
+
+        deleted_documents += 1
+
+        print(
+            f"Removed {len(ids)} chunks for {source}"
         )
 
-        logger.info("Removed deleted source: %s", source)
+    print(
+        f"Deletion synchronization complete: "
+        f"{deleted_documents} documents, "
+        f"{deleted_chunks} chunks removed."
+    )
 
-    connection.commit()
-
-    return len(stale_sources)
+    return deleted_documents, deleted_chunks
 
 
-# --------------------------------------------------
-# MAIN PIPELINE
-# --------------------------------------------------
+# ============================================================
+# INDEX INTEGRITY VALIDATION
+# ============================================================
+
+def validate_index(
+    collection,
+    manifest,
+    current_files,
+):
+    """
+    Check consistency between:
+    - Current source files
+    - Manifest entries
+    - ChromaDB records
+    """
+
+    print("\n========== INDEX INTEGRITY VALIDATION ==========")
+
+    issues = []
+
+    indexed_by_source = {}
+
+    records_without_source = 0
+
+    # Read all ChromaDB records in pages.
+    for _, metadata in iter_collection_metadata(collection):
+
+        if not metadata:
+            records_without_source += 1
+            continue
+
+        source = metadata.get("source")
+
+        if not source:
+            records_without_source += 1
+            continue
+
+        indexed_by_source.setdefault(
+            source,
+            [],
+        ).append(metadata)
+
+    manifest_documents = manifest["documents"]
+
+    # Check every manifest entry.
+    for source, entry in manifest_documents.items():
+
+        records = indexed_by_source.get(
+            source,
+            [],
+        )
+
+        expected_chunks = entry["chunks"]
+        expected_hash = entry["sha256"]
+
+        # Check source file existence.
+        path = current_files.get(source)
+
+        if path is None:
+
+            issues.append(
+                f"Manifest references missing file: {source}"
+            )
+
+        else:
+
+            current_hash = file_hash(path)
+
+            if current_hash != expected_hash:
+
+                issues.append(
+                    f"File hash differs from manifest: {source}"
+                )
+
+        # Check chunk count.
+        if len(records) != expected_chunks:
+
+            issues.append(
+                f"{source}: expected {expected_chunks} chunks, "
+                f"found {len(records)}"
+            )
+
+        # Check document hashes.
+        hashes = {
+            metadata.get("document_hash")
+            for metadata in records
+        }
+
+        if hashes != {expected_hash}:
+
+            issues.append(
+                f"{source}: inconsistent document hashes"
+            )
+
+        # Check chunk indexes.
+        indexes = [
+            metadata.get("chunk_index")
+            for metadata in records
+        ]
+
+        expected_indexes = list(
+            range(expected_chunks)
+        )
+
+        if (
+            len(indexes) != expected_chunks
+            or any(not isinstance(i, int) for i in indexes)
+            or sorted(indexes) != expected_indexes
+        ):
+
+            issues.append(
+                f"{source}: missing, duplicate or invalid chunk indexes"
+            )
+
+    # Find ChromaDB records not tracked by the manifest.
+    for source in indexed_by_source:
+
+        if source not in manifest_documents:
+
+            issues.append(
+                f"Untracked ChromaDB source: {source}"
+            )
+
+    if records_without_source:
+
+        issues.append(
+            f"{records_without_source} ChromaDB records "
+            f"have missing metadata or source fields"
+        )
+
+    # Check current files missing from the manifest.
+    for source in current_files:
+
+        if source not in manifest_documents:
+
+            issues.append(
+                f"Current document missing from manifest: {source}"
+            )
+
+    # Report results.
+    if issues:
+
+        print("\nINTEGRITY VALIDATION FAILED")
+
+        for issue in issues:
+            print(f"[ERROR] {issue}")
+
+        print(f"\nTotal issues: {len(issues)}")
+
+        return False
+
+    print("\nINTEGRITY VALIDATION PASSED")
+    print("All tracked documents have matching hashes.")
+    print("All chunk counts match the manifest.")
+    print("All chunk indexes are complete and unique.")
+    print("No untracked ChromaDB documents were found.")
+    print("All current documents are represented in the manifest.")
+
+    return True
+
+
+# ============================================================
+# MAIN INGESTION PIPELINE
+# ============================================================
 
 def main():
-    if not DATA_DIR.exists():
+
+    started = time.time()
+
+    collection = get_collection()
+
+    if not DATA_DIR.is_dir():
+
         raise FileNotFoundError(
-            f"Data directory does not exist: {DATA_DIR}"
+            f"Input directory does not exist: {DATA_DIR}"
         )
 
-    documents = sorted(
+    paths = sorted(
         path
         for path in discover_documents(DATA_DIR)
         if path.suffix.lower() in SUPPORTED_EXTENSIONS
     )
 
-    if not documents:
-        logger.warning(
-            "No supported documents found. Existing index preserved."
+    # Safety protection: never automatically delete everything
+    # because a scan unexpectedly returned zero documents.
+    if not paths:
+
+        raise RuntimeError(
+            "No supported documents discovered. "
+            "Ingestion and deletion synchronization aborted."
         )
-        return
 
-    collection = get_collection()
-    connection = get_manifest()
+    current_files = {
+        path.relative_to(DATA_DIR).as_posix(): path
+        for path in paths
+    }
 
-    try:
-        bootstrap_manifest(collection, connection)
+    current_sources = set(current_files.keys())
 
-        processed = 0
-        skipped = 0
-        failed = []
-        total_chunks = 0
+    manifest = load_manifest()
 
-        with requests.Session() as session:
-            for path in documents:
-                try:
-                    chunks, status = process_document(
-                        path,
-                        collection,
-                        connection,
-                        session,
-                    )
+    if manifest is None:
 
-                    total_chunks += chunks
+        manifest = bootstrap_manifest(
+            collection,
+            paths,
+        )
 
-                    if status == "processed":
-                        processed += 1
-                    else:
-                        skipped += 1
+    processed = 0
+    skipped = 0
+    failed = 0
+    embedded_chunks = 0
 
-                except Exception as error:
-                    failed.append((path, str(error)))
+    print(f"\nDiscovered {len(paths)} documents.")
 
-                    logger.exception(
-                        "Failed to process: %s",
-                        path,
-                    )
+    # --------------------------------------------------------
+    # STEP 1: INDEX NEW AND MODIFIED DOCUMENTS
+    # --------------------------------------------------------
 
-            # Never remove stale sources after a partial ingestion run.
-            if not failed:
-                active_sources = {
-                    path.relative_to(DATA_DIR).as_posix()
-                    for path in documents
-                }
+    for index, path in enumerate(paths, start=1):
 
-                removed = remove_deleted_documents(
-                    active_sources,
-                    collection,
-                    connection,
-                )
-            else:
-                removed = 0
-                logger.warning(
-                    "Stale cleanup skipped because ingestion had failures."
+        source = path.relative_to(DATA_DIR).as_posix()
+
+        try:
+
+            digest = file_hash(path)
+
+            if is_unchanged(
+                collection,
+                source,
+                digest,
+                manifest,
+            ):
+
+                skipped += 1
+
+                print(
+                    f"[{index}/{len(paths)}] UNCHANGED: {source}"
                 )
 
-        print("\n========== INGESTION SUMMARY ==========")
-        print("Discovered documents:", len(documents))
-        print("Processed documents:", processed)
-        print("Unchanged documents:", skipped)
-        print("Total chunks processed:", total_chunks)
-        print("Deleted sources:", removed)
-        print("Failures:", len(failed))
-        print("ChromaDB collection size:", collection.count())
+                continue
 
-        for path, error in failed:
-            print(f"\nFAILED: {path}\n{error}")
-
-        print("=======================================")
-
-        if failed:
-            raise RuntimeError(
-                f"Ingestion completed with {len(failed)} failure(s)."
+            print(
+                f"\n[{index}/{len(paths)}] INDEXING: {source}"
             )
 
-    finally:
-        connection.close()
+            count, digest = process_document(
+                collection,
+                path,
+            )
+
+            manifest["documents"][source] = {
+                "sha256": digest,
+                "chunks": count,
+                "indexed_at": datetime.now(
+                    timezone.utc
+                ).isoformat(),
+            }
+
+            save_manifest(manifest)
+
+            processed += 1
+            embedded_chunks += count
+
+        except Exception as error:
+
+            failed += 1
+
+            print(
+                f"ERROR: {source}: {error}"
+            )
+
+    # --------------------------------------------------------
+    # STEP 2: SYNCHRONIZE DELETIONS
+    # --------------------------------------------------------
+
+    deleted_documents, deleted_chunks = synchronize_deletions(
+        collection,
+        manifest,
+        current_sources,
+    )
+
+    # --------------------------------------------------------
+    # STEP 3: VALIDATE INDEX INTEGRITY
+    # --------------------------------------------------------
+
+    integrity_ok = validate_index(
+        collection,
+        manifest,
+        current_files,
+    )
+
+    # --------------------------------------------------------
+    # STEP 4: FINAL REPORT
+    # --------------------------------------------------------
+
+    print("\n========== INGESTION SUMMARY ==========")
+
+    print(f"Discovered: {len(paths)}")
+    print(f"New/modified documents indexed: {processed}")
+    print(f"Unchanged documents skipped: {skipped}")
+    print(f"Failed documents: {failed}")
+    print(f"Chunks embedded this run: {embedded_chunks}")
+
+    print(f"Deleted documents: {deleted_documents}")
+    print(f"Deleted chunks: {deleted_chunks}")
+
+    print(
+        f"Total documents in manifest: "
+        f"{len(manifest['documents'])}"
+    )
+
+    print(
+        f"Total chunks in ChromaDB: "
+        f"{collection.count()}"
+    )
+
+    print(
+        f"Integrity validation: "
+        f"{'PASSED' if integrity_ok else 'FAILED'}"
+    )
+
+    print(
+        f"Elapsed: {time.time() - started:.2f} seconds"
+    )
+
+    print("=======================================")
+
+    if failed or not integrity_ok:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

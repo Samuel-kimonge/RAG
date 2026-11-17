@@ -102,7 +102,6 @@ class StructuredDataStore:
 
         self._initialize_database()
 
-    @contextmanager
     def _connect(
         self,
         readonly: bool = False,

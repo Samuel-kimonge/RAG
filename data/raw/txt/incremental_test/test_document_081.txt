@@ -1,0 +1,14 @@
+NexaTech Incremental Ingestion Test Document 81
+
+Document ID: TEST-081
+Department: Engineering
+Category: Incremental Indexing
+Status: Active
+
+This document tests the ability of the NexaTech retrieval
+system to identify newly added documents, extract their
+contents, generate token-aware chunks, create embeddings,
+and store them in the ChromaDB vector database.
+
+Each test document has a unique identifier and content.
+Previously indexed documents must not be embedded again.

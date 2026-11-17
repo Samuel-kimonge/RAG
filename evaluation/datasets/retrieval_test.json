@@ -1,0 +1,250 @@
+{
+  "version": "1.0.0",
+  "name": "NexaTech retrieval baseline",
+  "description": "Manually curated retrieval relevance judgments based on the 28 substantive NexaTech ChromaDB chunks.",
+  "collection": "knowledge_base",
+  "embedding_model": "nomic-embed-text",
+  "allowed_sources": [
+    "csv/NexaTech_Inventory.csv",
+    "csv/NexaTech_Support_Tickets.csv",
+    "docx/NexaTech_Customer_Support_Playbook.docx",
+    "docx/NexaTech_Data_Retention_Policy.docx",
+    "docx/NexaTech_Employee_Handbook.docx",
+    "docx/NexaTech_Finance_Expense_Policy.docx",
+    "docx/NexaTech_Product_FAQ.docx",
+    "pdf/NexaTech_API_Integration_Guide.pdf",
+    "pdf/NexaTech_Cloud_Operations_Runbook.pdf",
+    "pdf/NexaTech_IT_Security_Policy.pdf",
+    "pdf/NexaTech_Incident_Response_Plan.pdf",
+    "pdf/NexaTech_Product_Atlas_Manual.pdf",
+    "pdf/NexaTech_Q3_Project_Report.pdf",
+    "txt/NexaTech_Sales_Onboarding.txt",
+    "txt/NexaTech_Training_Catalog.txt"
+  ],
+  "relevance_scale": {
+    "1": "Relevant supporting chunk",
+    "2": "Directly answers the query"
+  },
+  "test_cases": [
+    {
+      "id": "inventory-001",
+      "query": "Which assets are located at the Nairobi office?",
+      "category": "inventory",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "6cd5989c6acfa8bdd72d9ff8bd2a12fc1a01176dc444d1905ddd4c5357f64199", "relevance": 2},
+        {"chunk_id": "78d482b07232859d156c1cf1dcbb910e0b567ca8c8196dcad864ee277afb7255", "relevance": 2},
+        {"chunk_id": "6574131a9d5fa5a4fce8056ae33e3c778b01453e5b389bcf7c025fc77a577204", "relevance": 2}
+      ]
+    },
+    {
+      "id": "inventory-002",
+      "query": "Where is asset NX-006 assigned and what type of asset is it?",
+      "category": "inventory",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "d18d91c73e19cdaa3025de6c01d8f60a0bd35c06635351e44996073c86e309c8", "relevance": 2}
+      ]
+    },
+    {
+      "id": "inventory-003",
+      "query": "What is the status and location of the two server assets?",
+      "category": "inventory",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "137fc62a0d2777eec65400aa0b06f010db25d22e7fddfe2695a336e63de1c648", "relevance": 2},
+        {"chunk_id": "1e70d6d9aedd59e05be6def2d30dfbf1263f19ff527a35753b331b4a9304dc45", "relevance": 2}
+      ]
+    },
+    {
+      "id": "ticket-001",
+      "query": "How was the repeated 429 API response issue resolved?",
+      "category": "support_ticket",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "1c44b2447282497014b598a48e5893b62eee9cf91d7d7287fc5fbf3194f6d9db", "relevance": 2}
+      ]
+    },
+    {
+      "id": "ticket-002",
+      "query": "What actions were taken after a suspected exposed API token?",
+      "category": "support_ticket",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "021c5d85eea5655d7a24b276574608adbe29b173e514ade0b5ebc2cefc74ad8a", "relevance": 2}
+      ]
+    },
+    {
+      "id": "ticket-003",
+      "query": "How should an API client handle pagination so that it does not miss records?",
+      "category": "api",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "2eeca668d77834fbc2776fc4fb79879acdb4f75e57912f671190003f5e243463", "relevance": 2},
+        {"chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b", "relevance": 2}
+      ]
+    },
+    {
+      "id": "ticket-004",
+      "query": "Which policy should an employee consult about an expense claim?",
+      "category": "support_ticket",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "888e793bfc4d06a0f43342a5624bae6384f9e31b745201564303741af23b9361", "relevance": 2},
+        {"chunk_id": "5651a8cf5a50dbe6ec2098da505c3539c70bc9643dc3857c78dcbe21f7121548", "relevance": 1}
+      ]
+    },
+    {
+      "id": "support-001",
+      "query": "What is the first response target for a P1 support ticket?",
+      "category": "support_policy",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "6e255c3b21f20e523bc08728029df7019bd5d9c63a1209c85f4e98cc1c817d98", "relevance": 2}
+      ]
+    },
+    {
+      "id": "policy-001",
+      "query": "How long are closed support tickets and system audit logs retained?",
+      "category": "data_policy",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "f79f77c039c878170a5f7b52e9e85b9a2559ba1b65d2e1a77c2e4987b0e30ea0", "relevance": 2}
+      ]
+    },
+    {
+      "id": "policy-002",
+      "query": "How many working days in advance should employees submit planned leave requests?",
+      "category": "hr_policy",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "0ff69ca2b055e17ea2d753ccb86d8ad096b5a08bde92df3027bce4b9f97e577d", "relevance": 2}
+      ]
+    },
+    {
+      "id": "policy-003",
+      "query": "How many days per week may eligible employees work remotely?",
+      "category": "hr_policy",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "0ff69ca2b055e17ea2d753ccb86d8ad096b5a08bde92df3027bce4b9f97e577d", "relevance": 2}
+      ]
+    },
+    {
+      "id": "policy-004",
+      "query": "What approval is required for an expense above 200 fictional currency units?",
+      "category": "finance_policy",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "5651a8cf5a50dbe6ec2098da505c3539c70bc9643dc3857c78dcbe21f7121548", "relevance": 2}
+      ]
+    },
+    {
+      "id": "api-001",
+      "query": "What is the standard API rate limit per token and what does HTTP 429 mean?",
+      "category": "api",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "3b11348db8a0c68f8a7eb973c711d512edbe9a8a0f44041534cc960ce3ae160b", "relevance": 2},
+        {"chunk_id": "1c44b2447282497014b598a48e5893b62eee9cf91d7d7287fc5fbf3194f6d9db", "relevance": 1}
+      ]
+    },
+    {
+      "id": "security-001",
+      "query": "Which systems require multi-factor authentication?",
+      "category": "security",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "db04399b3712034dd7215840ff33c8dce425f7911abb1db07a07811c27490b7b", "relevance": 2}
+      ]
+    },
+    {
+      "id": "security-002",
+      "query": "How quickly must suspected phishing or credential exposure be reported?",
+      "category": "security",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "db04399b3712034dd7215840ff33c8dce425f7911abb1db07a07811c27490b7b", "relevance": 2}
+      ]
+    },
+    {
+      "id": "operations-001",
+      "query": "How frequently is the production database backed up?",
+      "category": "operations",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616", "relevance": 2}
+      ]
+    },
+    {
+      "id": "operations-002",
+      "query": "What are the recovery time objective and recovery point objective?",
+      "category": "operations",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "b1ce8b8f35636d5e1a57baaa6743c48e943529cb15b073316a0cf8ae5c84a616", "relevance": 2}
+      ]
+    },
+    {
+      "id": "product-001",
+      "query": "Which workspace roles are available in Atlas and what can administrators do?",
+      "category": "product",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508", "relevance": 2},
+        {"chunk_id": "751adeb697e448ae1573901158754b9ea5e28fd0d9eaf1e350d1c8a566d5d21f", "relevance": 1}
+      ]
+    },
+    {
+      "id": "product-002",
+      "query": "What should I check if Atlas search returns no results?",
+      "category": "product",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "6cb17bf20d0a7c1407095f40a6447d661aa569023c224093f268386d9383b5b6", "relevance": 2},
+        {"chunk_id": "0be4efdb063bf2f9c6f12da4b5b1b71ccca5d05766aa84666d2529a5cfb3d508", "relevance": 1}
+      ]
+    },
+    {
+      "id": "project-001",
+      "query": "How much did average report generation time improve after the Q3 migration?",
+      "category": "project_report",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "3a03fd81589880c046a11a1abf46bec9fadfbfc6b475b08411d2e117866242ce", "relevance": 2}
+      ]
+    },
+    {
+      "id": "sales-001",
+      "query": "What information should Sales provide to Support and Implementation after a signed agreement?",
+      "category": "sales",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "14d1edaa8ec8b7a96a858dc84c8d84ccf89766ff1c2d4e8142a0b6f5fa7f3b16", "relevance": 2}
+      ]
+    },
+    {
+      "id": "training-001",
+      "query": "How long is Python for Data Work training and what is its prerequisite?",
+      "category": "training",
+      "answerable": true,
+      "relevant_chunks": [
+        {"chunk_id": "c6706d1e132a432e6a959b5001e3c0efd59aa8d0dd3d6dc430e1af31968ae100", "relevance": 2}
+      ]
+    },
+    {
+      "id": "out-of-scope-001",
+      "query": "What is the current weather forecast in Nairobi?",
+      "category": "out_of_scope",
+      "answerable": false,
+      "relevant_chunks": []
+    },
+    {
+      "id": "out-of-scope-002",
+      "query": "What is the company's monthly payroll amount?",
+      "category": "out_of_scope",
+      "answerable": false,
+      "relevant_chunks": []
+    }
+  ]
+}

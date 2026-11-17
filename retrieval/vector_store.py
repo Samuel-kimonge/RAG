@@ -25,8 +25,9 @@ EXPECTED_EMBEDDING_DIMENSIONS = 768
 
 @dataclass(frozen=True)
 class RetrievalResult:
-    """A retrieved document and its similarity distance."""
+    """A retrieved document, its ChromaDB ID and similarity distance."""
 
+    chunk_id: str
     document: Document
     distance: float
 
@@ -72,9 +73,14 @@ class KnowledgeBase:
         )
 
     @property
-    def _collection(self):
-        """Return the existing Chroma collection."""
+    def collection(self):
+        """Return the existing ChromaDB collection."""
         return self._client.get_collection(COLLECTION_NAME)
+
+    @property
+    def _collection(self):
+        """Backward-compatible internal alias."""
+        return self.collection
 
     @staticmethod
     def _validate_database_path() -> None:
@@ -142,24 +148,15 @@ class KnowledgeBase:
         return {"$and": conditions}
 
     def search(
-        self,
-        query: str,
-        *,
-        k: int = 5,
-        file_type: str | None = None,
-        source: str | None = None,
+          self,
+          query: str,
+          *,
+          k: int = 5,
+          file_type: str | None = None,
+          source: str | None = None,
     ) -> list[RetrievalResult]:
         """
-        Retrieve the most relevant document chunks.
-
-        Args:
-            query: Natural-language search query.
-            k: Maximum number of results.
-            file_type: Optional metadata filter, e.g. 'pdf' or 'csv'.
-            source: Optional exact source path filter.
-
-        Returns:
-            Ranked retrieval results with document metadata and distances.
+        Retrieve ranked chunks while preserving their original ChromaDB IDs.
         """
 
         if not isinstance(query, str) or not query.strip():
@@ -171,31 +168,60 @@ class KnowledgeBase:
         metadata_filter = self._build_metadata_filter(
             file_type=file_type,
             source=source,
-        )
-
-        available_chunks = self._collection.count()
-        result_count = min(k, available_chunks)
+         )
 
         try:
-            matches = self.vector_store.similarity_search_with_score(
-                query=query.strip(),
-                k=result_count,
-                filter=metadata_filter,
+            available_chunks = self._collection.count()
+            result_count = min(k, available_chunks)
+
+            if result_count == 0:
+                return []
+
+            # Generate embeddings through LangChain.
+            query_embedding = self.embeddings.embed_query(query.strip())
+
+            # Query the existing Chroma collection directly.
+            response = self._collection.query(
+                query_embeddings=[query_embedding],
+                n_results=result_count,
+                where=metadata_filter,
+                include=[
+                    "documents",
+                    "metadatas",
+                    "distances",
+                ],
             )
+
+            ids = response["ids"][0]
+            documents = response["documents"][0]
+            metadatas = response["metadatas"][0]
+            distances = response["distances"][0]
+
+            return [
+                RetrievalResult(
+                    chunk_id=chunk_id,
+                    document=Document(
+                        page_content=document,
+                        metadata=metadata or {},
+                    ),
+                    distance=float(distance),
+                )
+                for chunk_id, document, metadata, distance in zip(
+                    ids,
+                    documents,
+                    metadatas,
+                    distances,
+                )
+            ]
+
         except Exception as error:
             logger.exception("Document retrieval failed.")
+
             raise RuntimeError(
                 "Could not retrieve documents from the knowledge base. "
-                "Check that Ollama is running and the embedding model is available."
+                "Check Ollama availability, embedding configuration "
+                "and ChromaDB connectivity."
             ) from error
-
-        return [
-            RetrievalResult(
-                document=document,
-                distance=float(distance),
-            )
-            for document, distance in matches
-        ]
 
 
 def get_knowledge_base() -> KnowledgeBase:
